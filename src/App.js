@@ -1,8 +1,7 @@
 import DonutLogo from './img/donut-logo.png';
 import EthtraderDonutsLogo from './img/ethtraderdonuts.png';
 import Ticker from './components/Ticker'
-import { Switch, Route } from 'react-router-dom';
-import IpfsRouter from 'ipfs-react-router';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 import Links from './components/Links'
 import TopNav from './components/TopNav'
 import Donuts from './components/Donuts';
@@ -16,7 +15,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <IpfsRouter>
+      <HashRouter>
         <TopNav></TopNav>
         <header className="header-style">
           <div className="inline-block">
@@ -44,7 +43,7 @@ function App() {
           </div>
           <Footer></Footer>
         </div>
-      </IpfsRouter>
+      </HashRouter>
     </div>
   );
 }
