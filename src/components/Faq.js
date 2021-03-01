@@ -22,7 +22,7 @@ class Faq extends React.Component {
                 <div className="faq-odd">
                     <p className="faq-q">Q: How do I register for donuts?</p>
 
-                    <p className="faq-a">A: See instructions on <a href="/register">this page</a>.</p>
+                    <p className="faq-a">A: See instructions on <a href="/#/register">this page</a>.</p>
                 </div>
                 <div className="faq-even">
                     <p className="faq-q">Q: How often are new donuts minted?</p>
@@ -37,7 +37,7 @@ class Faq extends React.Component {
                 <div className="faq-even">
                     <p className="faq-q">Q: How do I claim my donuts?</p>
 
-                    <p className="faq-a">A: See instructions on <a href="/claim">this page</a>.</p>
+                    <p className="faq-a">A: See instructions on <a href="/#/claim">this page</a>.</p>
                 </div>
                 <div className="faq-odd">
                     <p className="faq-q">Q: Will I lose my donuts if I don't claim them right away?</p>
