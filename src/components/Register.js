@@ -1,5 +1,5 @@
 import React from 'react';
-import DonutLogo from '../img/donut-logo.png';
+import Title from '../img/title-register.png';
 import Reg01 from '../img/reg-01.png';
 import Reg02 from '../img/reg-02.png';
 import Reg03 from '../img/reg-03.png';
@@ -15,9 +15,7 @@ class Register extends React.Component {
     render() {
         return (
             <div className="content">
-                <img src={DonutLogo} alt="Donut Logo" className="logo-image" />
-                <span className="title-text"><u>How to Register for Donuts</u></span>
-                <img src={DonutLogo} alt="Donut Logo" className="logo-image" />
+                <img src={Title} alt="How to Register for Donuts" className="logo-image" />
                 
                 <table className="how-to-table">
                     <tbody>

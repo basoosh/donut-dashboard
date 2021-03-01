@@ -71,7 +71,8 @@ html {
   margin-right: auto;
   width: 64%;
   margin-top: 5vmin;
-  border:1px solid rgb(255,182,222)
+  margin-bottom: 10px;
+  border:3px solid rgb(255,182,222)
 }
 
 .content-table {
@@ -108,21 +109,50 @@ a {
 .left-body {
   text-align: left;
   margin: 20px;
-  background-color: #282c34;
+  background-color: #181a1d;
+}
+
+.faq-odd {
+  text-align: left;
+  margin: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 35px;
+  background-color: #232529;
+  border:1px solid rgb(255,182,222)
+}
+
+.faq-even {
+  text-align: left;
+  margin: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 35px;
+  background-color: #3e434b;
+  border:1px solid rgb(255,182,222)
+}
+
+.faq-q {
+  font-weight: bold;
+  font-size: 18px;
+  color: rgb(255,182,222);
 }
 
 .container {
-  width: 80%;
-  background-color: #282c34;
+  width: 100%;
+  background-color: #181a1d;
   margin: auto;
   padding: 10px;
 }
 
 .content {
   margin: auto;
-  width: 80%;
-  border:1px solid rgb(255,182,222);
-  background-color: #282c34;
+  width: 65%;
+  background-color: #181a1d;
 }
 
 .howToImg {

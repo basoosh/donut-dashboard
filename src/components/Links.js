@@ -1,7 +1,7 @@
 import React from 'react';
 import RedditLogo from '../img/donut-reddit.png';
 import OverviewLogo from '../img/donut-overview.png';
-import FaqLogo from '../img/donut-faq.png';
+import AragonLogo from '../img/donut-aragon.png';
 import SteakLogo from '../img/donut-steak.png';
 import EtherscanLogo from '../img/donut-etherscan.png';
 
@@ -25,8 +25,8 @@ class Links extends React.Component {
                                 </a>
                             </th>
                             <th className="logo-column">
-                                <a href="https://www.reddit.com/r/ethtrader/comments/kl6ldu/donuts_faq/"  target="_blank" rel="noreferrer">
-                                    <img src={FaqLogo} alt="FAQ Icon" className="logo-image-medium" />
+                                <a href="https://client.aragon.org/#/0x57EBE61f5f8303AD944136b293C1836B3803b4c0" target="_blank" rel="noreferrer">
+                                    <img src={AragonLogo} alt="Aragon Icon" className="logo-image-medium" />
                                 </a>
                             </th>
                             <th className="logo-column">
@@ -52,8 +52,8 @@ class Links extends React.Component {
                                 </a>
                             </th>
                             <th className="logo-column">
-                                <a href="https://www.reddit.com/r/ethtrader/comments/kl6ldu/donuts_faq/"  target="_blank" rel="noreferrer">
-                                    <span className="caption-link">Donut FAQ</span>
+                                <a href="https://client.aragon.org/#/0x57EBE61f5f8303AD944136b293C1836B3803b4c0"  target="_blank" rel="noreferrer">
+                                    <span className="caption-link">Aragon DAO</span>
                                 </a>
                             </th>
                             <th className="logo-column">

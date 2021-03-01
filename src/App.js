@@ -6,6 +6,7 @@ import Links from './components/Links'
 import TopNav from './components/TopNav'
 import Donuts from './components/Donuts';
 import Register from './components/Register';
+import Faq from './components/Faq';
 import Distribution from './components/Distribution'
 import Claim from './components/Claim'
 import Footer from './components/Footer'
@@ -30,6 +31,7 @@ function App() {
           <div className="container">
             <Switch>
               <Route exact path="/"><Donuts></Donuts></Route>
+              <Route path="/faq"><Faq></Faq></Route>
               <Route path="/register"><Register></Register></Route>
               <Route path="/claim"><Claim></Claim></Route>
               <Route path="/distribution"><Distribution></Distribution></Route>

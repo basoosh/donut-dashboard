@@ -1,5 +1,5 @@
 import React from 'react';
-import DonutLogo from '../img/donut-logo.png';
+import Title from '../img/title-donuts.png';
 import BannerLogo from '../img/donut-banner.png';
 import MembershipLogo from '../img/donut-membership.png';
 import TippingLogo from '../img/donut-tipping.png';
@@ -14,9 +14,7 @@ class Donuts extends React.Component {
     render() {
         return (
             <div className="content">
-                <img src={DonutLogo} alt="Donut Icon" className="logo-image" />
-                <span className="title-text"><u>What are Donuts?</u></span>
-                <img src={DonutLogo} alt="Donut Icon" className="logo-image" />
+                <img src={Title} alt="What are donuts?" className="logo-image" />
                 
                 <p className="left-body">Donuts are tokens that represent community contribution & engagement 
                 at the <a href="http://reddit.com/r/ethtrader" target="_blank" rel="noreferrer">/r/ethtrader subreddit</a>.  Users
@@ -74,9 +72,12 @@ class Donuts extends React.Component {
                 </table>
                     
                 <br></br>
-                <p className="left-body">Following the ERC-20 token standard, Donuts are the first ever 
-                implementation of Reddit Community Points and the only Community Points token to currently 
-                exist on the Ethereum main net.</p>
+                <p className="left-body">Donuts spent on the banner and premium memberships are burned, leaving circulation and forever destroyed.</p>
+
+                <p className="left-body">Four million new Donuts are baked and distributed every 28 days to registered users, based off of 
+                their contribution to the /r/ethtrader subreddit. There is a correlation between karma earned and how many Donuts 
+                a user will receive, though it is not 1:1.  Donuts can also be earned by providing DONUT-ETH liquidity on Uniswap and then staking the UNI V2 token.  Moderators also receive 
+                monthly Donuts.</p>
 
                 <p className="left-body">Donuts are available to be traded on the following exchanges:</p>
                  
@@ -118,6 +119,11 @@ class Donuts extends React.Component {
                         </tr>
                     </tbody>
                 </table>
+
+                <br></br>
+                <p className="left-body">Following the ERC-20 token standard, Donuts are the first ever 
+                implementation of Reddit Community Points and the only Community Points token to currently 
+                exist on the Ethereum main net.</p>
 
             </div>
         );

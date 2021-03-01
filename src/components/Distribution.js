@@ -1,5 +1,5 @@
 import React from 'react';
-import DonutLogo from '../img/donut-logo.png';
+import Title from '../img/title-distributions.png';
 import distribution from '../distribution/most_recent.json';
 
 class Distribution extends React.Component {
@@ -21,13 +21,10 @@ class Distribution extends React.Component {
     render() {
         return (
             <div className="content">
-                <img src={DonutLogo} alt="Donut Logo" className="logo-image" />
-                <span className="title-text"><u>Most Recent Donut Distribution</u></span>
-                <img src={DonutLogo} alt="Donut Logo" className="logo-image" />
+                <img src={Title} alt="Fresh Donuts" className="logo-image" />
                 <br></br>
-                <i>The most recent distribution occurred on January 21st, 2021.</i>
+                <i>The most recent distribution occurred on February 25th, 2021.</i>
                 <br></br>
-                <i>The next distribution will occur on February 18th, 2021.</i>
                 
                 
                 <table className="donut-table">
