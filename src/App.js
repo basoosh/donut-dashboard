@@ -18,6 +18,7 @@ function App() {
       <HashRouter>
         <TopNav></TopNav>
         <header className="header-style">
+          <Ticker></Ticker>
           <div className="inline-block">
             <img src={DonutLogo} className="App-logo" alt="logo" />   
           </div>        
@@ -27,7 +28,6 @@ function App() {
         </header>
 
         <div className="body-style">
-          <Ticker></Ticker>
           <div className="container">
             <Switch>
               <Route exact path="/"><Donuts></Donuts></Route>
@@ -37,7 +37,6 @@ function App() {
               <Route path="/distribution"><Distribution></Distribution></Route>
             </Switch>
           </div>
-          <div className="break-container"></div>
           <div className="links-container">
             <Links></Links>
           </div>

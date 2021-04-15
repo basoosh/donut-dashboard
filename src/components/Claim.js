@@ -15,10 +15,6 @@ class Claim extends React.Component {
                 <img src={Title} alt="How to claim donuts" className="logo-image" />
                 
                 <table className="how-to-table">
-                    <p>
-
-                    </p>
-
                     <tbody>
                         <tr>
                             <th className="numColumn">

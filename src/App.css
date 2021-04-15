@@ -1,5 +1,5 @@
 html { 
-  background-color: #282c34;
+  background-color: #271422;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -7,7 +7,7 @@ html {
 }
 
 .topnav-group {
-  background-color: #181a1d;
+  background-color: #1e151c;
   overflow: hidden;
 }
 
@@ -36,7 +36,7 @@ html {
 
 .topnav a.active {
   background-color: rgb(255,182,222);
-  color: #181a1d;;
+  color: #1e151c;
 }
 
 .green-arrow {
@@ -70,9 +70,12 @@ html {
   margin-left: auto;
   margin-right: auto;
   width: 64%;
-  margin-top: 5vmin;
-  margin-bottom: 10px;
-  border:3px solid rgb(255,182,222)
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 5px;
+  border-image-source: linear-gradient(to left, #fe6d72, #fe6dda);
 }
 
 .content-table {
@@ -109,7 +112,7 @@ a {
 .left-body {
   text-align: left;
   margin: 20px;
-  background-color: #181a1d;
+  background-color: #1e151c;
 }
 
 .faq-odd {
@@ -144,15 +147,19 @@ a {
 
 .container {
   width: 100%;
-  background-color: #181a1d;
+  background-color: #1e151c;
   margin: auto;
   padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-image: linear-gradient(to left, #fe6d72 1%, #fe6dda 50%, #fe6d72 100%) 
+                100% 0 100% 0/1px 0 1px 0 stretch;
 }
 
 .content {
   margin: auto;
   width: 65%;
-  background-color: #181a1d;
+  background-color: #1e151c;
 }
 
 .howToImg {
@@ -173,7 +180,7 @@ a {
   height: 50px;
   text-align: left;
   width: 100%;
-  background-color: #181a1d;
+  background-color: #1e151c;
 }
 
 .links-container {
@@ -226,10 +233,19 @@ a {
   font-size: 18px;
 }
 
+.faq-title {
+  font-weight: bold;
+  font-size: 18px;
+  color: #fe6d72;
+  text-align: left;
+}
+
 .caption-body {
   font-weight: normal;
   font-style: italic;
-  color:rgb(175, 175, 175)
+  color:rgb(175, 175, 175);
+  margin: auto;
+  width: 80%;
 }
 
 .caption-link {
@@ -259,7 +275,7 @@ a {
 
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: #271422;
   color: white;
 }
 
@@ -298,13 +314,14 @@ a {
 
 .header-style {
   text-align: center;
-  background-color: #282c34;
+  background-color: #271422;
+  margin-bottom: 20px;
   color: white;
 }
 
 .body-style {
   text-align: center;
-  background-color: #282c34;
+  background-color: #271422;
   color: white;
 }
 

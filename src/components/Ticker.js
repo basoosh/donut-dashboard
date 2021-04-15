@@ -50,7 +50,7 @@ class Ticker extends React.Component {
     render() {
         return (
             <div>
-                {this.state.isLoading ? <p>Loading...</p> :
+                {this.state.isLoading ? <p>Loading Donut Price Information...</p> :
                 <table className="ticker-table">
                     <thead>
                         <tr>
