@@ -2,6 +2,10 @@ import React from 'react';
 import getDonutStats from '../services/coingecko-service';
 import DownArrow from '../img/down-arrow.svg';
 import UpArrow from '../img/up-arrow.svg';
+import USD from '../img/logo-usd.png';
+import ETH from '../img/logo-eth.png';
+import BURRITO from '../img/logo-burrito.png';
+import LAMBO from '../img/logo-lambo.png';
 
 class Ticker extends React.Component {
 
@@ -31,8 +35,12 @@ class Ticker extends React.Component {
         this.setState({
              donutUSD: donutStats.donutUSD,
              donutETH: donutStats.donutETH,
+             donutBURRITO: (donutStats.donutUSD / 7.5).toFixed(8),
+             donutLAMBO: (donutStats.donutUSD / 467617).toFixed(8),
              usdDonut: donutStats.usdDonut,
              ethDonut: donutStats.ethDonut,
+             burritoDonut: donutStats.usdDonut * 7.5,
+             lamboDonut: donutStats.usdDonut * 467617,
              usd24hr: donutStats.usd24hr,
              eth24hr: donutStats.eth24hr, 
              usdVolume: donutStats.usdVolume, 
@@ -51,56 +59,62 @@ class Ticker extends React.Component {
         return (
             <div>
                 {this.state.isLoading ? <p>Loading Donut Price Information...</p> :
-                <table className="ticker-table">
-                    <thead>
-                        <tr>
-                            <th className="header">
-                                <b>USD Value</b>
-                            </th>
-                            <th className="header">
-                                <b>ETH Value</b>
-                            </th>
-                            <th className="header">
-                                <b>Marketcap</b>
-                            </th>
-                            <th className="header">
-                                <b>24hr Trading Volume</b>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th className="ticker-column">
-                                <p>${this.state.donutUSD} <b>USD</b>
-                                <br></br>
-                                (1 <b>USD</b> = {this.formatNumber(Math.ceil(this.state.usdDonut))} <b>DONUT</b>)
-                                <br></br>
-                                {this.state.usd24hr >= 0 ? <img src={UpArrow} alt="Up arrow" className="green-arrow" /> : <img src={DownArrow} alt="Down arrow" className="red-arrow" />}
-                                {this.state.usd24hr >= 0 ? <span className="upArrow">+{this.state.usd24hr.toFixed(2)}%</span> : <span className="downArrow">{this.state.usd24hr.toFixed(2)}%</span>}
-                                </p>
-                            </th>
-                            <th className="ticker-column">
-                                <p>{this.state.donutETH} <b>ETH</b>
-                                <br></br>
-                                (1 <b>ETH</b> = {this.formatNumber(Math.ceil(this.state.ethDonut))} <b>DONUT</b>)
-                                <br></br>
-                                {this.state.eth24hr >= 0 ? <img src={UpArrow} alt="Up arrow" className="green-arrow" /> : <img src={DownArrow} alt="Down arrow" className="red-arrow" />}
-                                {this.state.eth24hr >= 0 ? <span className="upArrow">+{this.state.eth24hr.toFixed(2)}%</span> : <span className="downArrow">{this.state.eth24hr.toFixed(2)}%</span>}
-                                </p>
-                            </th>
-                            <th className="ticker-column">
-                                <p>${this.formatNumber(Math.ceil(this.state.usdMarketCap))} <b>USD</b>
-                                <br></br>
-                                {this.formatNumber(Math.ceil(this.state.ethMarketCap))} <b>ETH</b></p>
-                            </th>
-                            <th className="ticker-column">
-                                <p>${this.formatNumber(Math.ceil(this.state.usdVolume))} <b>USD</b>
-                                <br></br>
-                                {this.formatNumber(Math.ceil(this.state.ethVolume))} <b>ETH</b></p>
-                            </th>
-                        </tr>
-                    </tbody>                
-                </table>
+                <div class="tcontainer"><div class="ticker-wrap"><div class="ticker-move">
+                    <div class="ticker-item">
+                        <img src={USD} alt="USD" className="ticker-logo" /> 
+                        &nbsp;
+                        ${this.state.donutUSD} <b>USD</b> 
+                        &nbsp;
+                        {this.state.usd24hr >= 0 ? <img src={UpArrow} alt="Up arrow" className="green-arrow" /> : <img src={DownArrow} alt="Down arrow" className="red-arrow" />} 
+                        {this.state.usd24hr >= 0 ? <span className="upArrow">+{this.state.usd24hr.toFixed(2)}%</span> : <span className="downArrow">{this.state.usd24hr.toFixed(2)}%</span>} 
+                        &nbsp;
+                        (1 <b>USD</b> = {this.formatNumber(Math.ceil(this.state.usdDonut))} <b>DONUT</b>)
+                    </div>
+                    <div class="ticker-item">
+                        <img src={ETH} alt="ETH" className="ticker-logo" />
+                        &nbsp;
+                        {this.state.donutETH} <b>ETH</b>
+                        &nbsp;
+                        {this.state.eth24hr >= 0 ? <img src={UpArrow} alt="Up arrow" className="green-arrow" /> : <img src={DownArrow} alt="Down arrow" className="red-arrow" />}
+                        {this.state.eth24hr >= 0 ? <span className="upArrow">+{this.state.eth24hr.toFixed(2)}%</span> : <span className="downArrow">{this.state.eth24hr.toFixed(2)}%</span>}                
+                        &nbsp;
+                        (1 <b>ETH</b> = {this.formatNumber(Math.ceil(this.state.ethDonut))} <b>DONUT</b>)
+                    </div>
+                    <div class="ticker-item">
+                        <img src={BURRITO} alt="burrito" className="ticker-logo" />
+                        &nbsp;
+                        {this.state.donutBURRITO} <b>Burrito</b>
+                        &nbsp;
+                        {this.state.usd24hr >= 0 ? <img src={UpArrow} alt="Up arrow" className="green-arrow" /> : <img src={DownArrow} alt="Down arrow" className="red-arrow" />}
+                        {this.state.usd24hr >= 0 ? <span className="upArrow">+{this.state.usd24hr.toFixed(2)}%</span> : <span className="downArrow">{this.state.usd24hr.toFixed(2)}%</span>}                
+                        &nbsp;
+                        (1 <b>Burrito</b> = {this.formatNumber(Math.ceil(this.state.burritoDonut))} <b>DONUT</b>)
+                    </div>
+                    <div class="ticker-item">
+                        <img src={LAMBO} alt="lambo" className="ticker-logo" />
+                        &nbsp;
+                        {this.state.donutLAMBO} <b>Lambo</b>
+                        &nbsp;
+                        {this.state.usd24hr >= 0 ? <img src={UpArrow} alt="Up arrow" className="green-arrow" /> : <img src={DownArrow} alt="Down arrow" className="red-arrow" />}
+                        {this.state.usd24hr >= 0 ? <span className="upArrow">+{this.state.usd24hr.toFixed(2)}%</span> : <span className="downArrow">{this.state.usd24hr.toFixed(2)}%</span>}                
+                        &nbsp;
+                        (1 <b>Lambo</b> = {this.formatNumber(Math.ceil(this.state.lamboDonut))} <b>DONUT</b>)
+                    </div>
+                    <div class="ticker-item">
+                        <b>Marketcap:</b>
+                        &nbsp;
+                        ${this.formatNumber(Math.ceil(this.state.usdMarketCap))} <b>USD</b>
+                        &nbsp;
+                        ({this.formatNumber(Math.ceil(this.state.ethMarketCap))} <b>ETH</b>)
+                    </div>
+                    <div class="ticker-item">
+                        <b>24hr volume:</b>
+                        &nbsp;
+                        ${this.formatNumber(Math.ceil(this.state.usdVolume))} <b>USD</b>
+                        &nbsp;
+                        ({this.formatNumber(Math.ceil(this.state.ethVolume))} <b>ETH</b>)
+                    </div>
+              </div></div></div>
                 }
             </div>
         );

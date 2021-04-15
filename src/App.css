@@ -69,13 +69,80 @@ html {
 .ticker-table {
   margin-left: auto;
   margin-right: auto;
-  width: 64%;
   margin-top: 4px;
   margin-bottom: 4px;
-  border: 10px solid;
-  border-image-slice: 1;
-  border-width: 5px;
-  border-image-source: linear-gradient(to left, #fe6d72, #fe6dda);
+  table-layout: fixed;
+}
+
+.ticker-column {
+  font-weight: normal;
+  height: 21px;
+  overflow: hidden;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.ticker-column-logo {
+  font-weight: normal;
+  height: 21px;
+  overflow: hidden;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.ticker-container {
+  margin: auto;
+  display: grid;
+  border-style: solid;
+  border-width: 1px;
+  border-image: linear-gradient(to left, #fe6d72 1%, #fe6dda 50%, #fe6d72 100%) 
+                100% 0 0% 0/1px 0 1px 0 stretch;
+}
+
+.ticker-logo {
+  height: 20px;
+}
+
+.tcontainer {
+  width: 100%;
+  overflow: hidden; /* Hide scroll bar */
+}
+ 
+/* MIDDLE CONTAINER */
+.ticker-wrap {
+  width: 100%;
+  padding-left: 100%; /* Push contents to right side of screen */
+  background-color: #1e151c;
+  padding-top: 2px;
+  border-style: solid;
+  border-width: 1px;
+  border-image: linear-gradient(to left, #fe6d72 1%, #fe6dda 50%, #fe6d72 100%) 
+                100% 0 0% 0/1px 0 1px 0 stretch;
+}
+
+/* INNER CONTAINER */
+@keyframes ticker {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
+}
+.ticker-move {
+  /* Basically move items from right side of screen to left in infinite loop */
+  display: inline-block;
+  white-space: nowrap;
+  padding-right: 100%;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-name: ticker;
+  animation-duration: 60s;
+}
+.ticker-move:hover{
+  animation-play-state: paused; /* Pause scroll on mouse hover */
+}
+
+/* ITEMS */
+.ticker-item{
+  display: inline-block; /* Lay items in a horizontal line */
+  padding: 0 2rem;
 }
 
 .content-table {
@@ -216,12 +283,6 @@ a {
   padding-top: 15px;
   padding-left: 50px; 
   padding-right: 50px;
-}
-
-.ticker-column {
-  font-weight: normal;
-  padding-left: 30px; 
-  padding-right: 30px;
 }
 
 .contentColumn {
