@@ -23,7 +23,7 @@ class Distribution extends React.Component {
             <div className="content">
                 <img src={Title} alt="Fresh Donuts" className="logo-image" />
                 <br></br>
-                <i>The most recent distribution occurred on March 25th, 2021.</i>
+                <i>The most recent distribution was started on April 18th, 2021.</i>
                 <br></br>
                 
                 

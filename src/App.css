@@ -163,7 +163,7 @@ html {
 }
 
 a {
-  color: rgb(255,182,222);
+  color: #fe6d72;
   text-decoration: none;
 }
 
@@ -292,6 +292,11 @@ a {
 .caption-heading {
   font-weight: bold;
   font-size: 18px;
+}
+
+.heading {
+  font-weight: bold;
+  font-size: 24px;
 }
 
 .faq-title {

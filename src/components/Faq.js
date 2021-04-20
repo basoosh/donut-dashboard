@@ -26,9 +26,19 @@ class Faq extends React.Component {
 
                     <p className="faq-a">A: See instructions on <a href="/#/register">this page</a>.</p>
                 </div>
+                <div className="faq-even">
+                    <p className="faq-q">Q: How can I tip other users with donuts?</p>
+
+                    <p className="faq-a">A: On /r/ethtrader, click the donut icon next to a user's name and it will take you to <a href="https://www.donut.finance/tip/" target="_blank" rel="noreferrer">donut.finance</a>.  Connect your Metamask account to this site, enter the amount you would like to tip, and submit.  Note that tipping uses donuts on the xDai sidechain, not the main net, in order to get around high gas fees.</p>
+                </div>
 
                 <p className="faq-title">Donut Tokenomics</p>
 
+                <div className="faq-odd">
+                    <p className="faq-q">Q: How does karma earned relate to donuts earned?</p>
+
+                    <p className="faq-a">A: Upvotes help users earn more donuts, but it is not a 1:1 relationship.  The donuts earned by an individual at the end of the month depends on the total karma earned by all users.  Additionally, posts flaired Comedy and Media earn 10% as many donuts as other posts, per community vote.</p>
+                </div>
                 <div className="faq-even">
                     <p className="faq-q">Q: How often are new donuts minted?</p>
 
@@ -79,6 +89,11 @@ class Faq extends React.Component {
                     <p className="faq-q">Q: Where can I buy and sell donuts?</p>
 
                     <p className="faq-a">A: Uniswap, Hoo.com, and Honeyswap all currently trade donuts.</p>
+                </div>
+                <div className="faq-odd">
+                    <p className="faq-q">Q: How can I add donuts to my token list in Metamask?</p>
+
+                    <p className="faq-a">A: At the bottom of the assets tab, click the <span className="highlight">Add Token</span> button.  Click the <span className="highlight">Custom Token</span> tab.  In the <span className="highlight">Token Contract Address</span> input box, paste <span className="highlight">0xc0f9bd5fa5698b6505f643900ffa515ea5df54a9</span>.  (If you are adding Donuts on xDai, instead use <span className="highlight">0x524B969793a64a602342d89BC2789D43a016B13A</span>)</p>
                 </div>
                 <div className="faq-odd">
                     <p className="faq-q">Q: What is CONTRIB?</p>
