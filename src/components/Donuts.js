@@ -30,47 +30,30 @@ class Donuts extends React.Component {
                     <tbody>
                         <tr>
                             <th className="logo-column">
-                                <img src={VotingLogo} alt="Voting Icon" className="logo-image-large" />
-                            </th>
-                            <th className="logo-column">
-                                <img src={MembershipLogo} alt="Membership Icon" className="logo-image-large" />
-                                
-                            </th>
-                            <th className="logo-column">
-                                <img src={BannerLogo} alt="Banner Icon" className="logo-image-large" />
-                            </th>
-                            <th className="logo-column">
-                                <img src={TippingLogo} alt="Tipping Icon" className="logo-image-large" />
-                            </th>
-                        </tr>
-                        <tr>
-                            <th className="logo-column">
+                                <img src={VotingLogo} alt="Voting Icon" className="logo-image-large" /><br />
                                 <span className="caption-heading">Voting</span>
-                            </th>
-                            <th className="logo-column">
-                                <span className="caption-heading">Special Membership</span>
-                            </th>
-                            <th className="logo-column">
-                                <span className="caption-heading">Banner Advertising</span>
-                            </th>
-                            <th className="logo-column">
-                                <span className="caption-heading">Tipping</span>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th className="logo-column">
                                 <p className="caption-body">Donuts increase a user's vote weight in community governance polls.</p>
+                                <br />
                             </th>
                             <th className="logo-column">
+                                <img src={MembershipLogo} alt="Membership Icon" className="logo-image-large" /><br />
+                                <span className="caption-heading">Special Membership</span>
                                 <p className="caption-body">Donuts can be used to purchase special memberships, which bring a number of aesthetic perks.</p>
+                                <br />
                             </th>
                             <th className="logo-column">
+                                <img src={BannerLogo} alt="Banner Icon" className="logo-image-large" /><br />
+                                <span className="caption-heading">Banner Advertising</span>
                                 <p className="caption-body">Donuts can be used to purchase control of the top banner, often used for advertising purposes.</p>
+                                <br />
                             </th>
                             <th className="logo-column">
+                                <img src={TippingLogo} alt="Tipping Icon" className="logo-image-large" /><br />
+                                <span className="caption-heading">Tipping</span>
                                 <p className="caption-body">Donuts can be used to tip other users for content you appreciate.</p>
+                                <br />
                             </th>
-                        </tr>                        
+                        </tr>                       
                     </tbody>
                 </table>
                 <br />
@@ -137,34 +120,29 @@ class Donuts extends React.Component {
                             <th className="logo-column">
                                 <a href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0xc0f9bd5fa5698b6505f643900ffa515ea5df54a9"  target="_blank" rel="noreferrer">
                                     <img src={UniswapLogo} alt="Uniswap Icon" className="logo-image-large" />
+                                </a><br />
+                                <a href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0xc0f9bd5fa5698b6505f643900ffa515ea5df54a9"  target="_blank" rel="noreferrer">
+                                    <span className="caption-heading">Uniswap</span>
                                 </a>
+                                <br /><br />
                             </th>
                             <th className="logo-column">
                                 <a href="https://hoo.com/spot/donut-usdt"  target="_blank" rel="noreferrer">
                                     <img src={HooLogo} alt="Hoo Icon" className="logo-image-large" />
+                                </a><br />
+                                <a href="https://hoo.com/spot/donut-usdt"  target="_blank" rel="noreferrer">
+                                    <span className="caption-heading">Hoo</span>
                                 </a>
+                                <br /><br />
                             </th>
                             <th className="logo-column">
                                 <a href="https://honeyswap.org/"  target="_blank" rel="noreferrer">
                                     <img src={HoneyswapLogo} alt="Honeyswap Icon" className="logo-image-large" />
-                                </a>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th className="logo-column">
-                                <a href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0xc0f9bd5fa5698b6505f643900ffa515ea5df54a9"  target="_blank" rel="noreferrer">
-                                    <span className="caption-heading">Uniswap</span>
-                                </a>
-                            </th>
-                            <th className="logo-column">
-                                <a href="https://hoo.com/spot/donut-usdt"  target="_blank" rel="noreferrer">
-                                    <span className="caption-heading">Hoo</span>
-                                </a>
-                            </th>
-                            <th className="logo-column">
+                                </a><br />
                                 <a href="https://honeyswap.org/"  target="_blank" rel="noreferrer">
                                     <span className="caption-heading">Honeyswap</span>
                                 </a>
+                                <br /><br />
                             </th>
                         </tr>
                     </tbody>

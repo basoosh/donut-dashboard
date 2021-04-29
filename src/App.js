@@ -23,7 +23,7 @@ function App() {
             <img src={DonutLogo} className="App-logo" alt="logo" />   
           </div>        
           <div className="inline-block">
-            <img src={EthtraderDonutsLogo} alt="Donuts Logo" />        
+            <img src={EthtraderDonutsLogo} className="donut-dashboard-logo" alt="Donuts Logo" />        
           </div>
         </header>
 
