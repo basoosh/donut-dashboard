@@ -13,13 +13,14 @@ class Donuts extends React.Component {
 
     render() {
         return (
+            <div>
             <div className="content">
                 <img src={Title} alt="What are donuts?" className="logo-image" />
                 
                 <p className="left-body">Donuts are tokens that represent community contribution & engagement 
                 at the <a href="http://reddit.com/r/ethtrader" target="_blank" rel="noreferrer">/r/ethtrader subreddit</a>.  Users
                 earn Donuts simply by participating and contributing content to /r/ethtrader. An easy way to 
-                think of them is a spendable and tradeable Karma, but exclusive to /r/ethtrader.</p>
+                think of them is a spendable and tradeable karma, but exclusive to /r/ethtrader.</p>
 
                 <p className="left-body">Donuts can be used for:</p>
 
@@ -70,15 +71,62 @@ class Donuts extends React.Component {
                         </tr>                        
                     </tbody>
                 </table>
+                <br />
+                <p className="left-body">Following the ERC-20 token standard, Donuts are the first ever 
+                implementation of Reddit Community Points and the only Community Points token to currently 
+                exist on the Ethereum main net.</p>
                     
-                <br></br>
-                <p className="left-body">Donuts spent on the banner and premium memberships are burned, leaving circulation and forever destroyed.</p>
-
-                <p className="left-body">Four million new Donuts are baked and distributed every 28 days to registered users, based off of 
+            </div>
+            <div className="container-middle">
+            <div className="content-middle">
+                <p className="left-body-middle">New Donuts are baked and distributed every 4 weeks to registered users, based off of 
                 their contribution to the /r/ethtrader subreddit. There is a correlation between karma earned and how many Donuts 
-                a user will receive, though it is not 1:1.  Donuts can also be earned by providing DONUT-ETH liquidity on Uniswap and then staking the UNI V2 token.  Moderators also receive 
-                monthly Donuts.</p>
+                a user will receive, though it is not 1:1.  Donuts are also distributed for other purposes, such as liquidity incentives,
+                further development of Donuts, and subreddit moderation.</p>   
 
+                    <table className="content-middle-table">
+                        <tbody>
+                            <tr>
+                                <th rowSpan="6"><img src={TippingLogo} className="logo-image-large" alt="Distribution" /></th>
+                                <th colSpan="2" className="highlight-large">Donut Distributions</th>
+                            </tr>
+                            <tr>
+                                <th className="distribute-header">Posts and Comments:</th>
+                                <th className="distribute-body">3,200K Donuts per distribution</th>
+                            </tr>
+                            <tr>
+                                <th className="distribute-header">Donut Development:</th>
+                                <th className="distribute-body">600K Donuts per distribution</th>
+                            </tr>
+                            <tr>
+                                <th className="distribute-header">Uniswap Liquidity Incentives:</th>
+                                <th className="distribute-body">400K Donuts per distribution</th>
+                            </tr>
+                            <tr>
+                                <th className="distribute-header">Honeyswap Liquidity Incentives:</th>
+                                <th className="distribute-body">200K Donuts per distribution</th>
+                            </tr>
+                            <tr>
+                                <th className="distribute-header">Moderation:</th>
+                                <th className="distribute-body">200K Donuts per distribution</th>
+                            </tr>
+                            <tr className="spacer-row"><br /><br /><br /></tr>
+                            <tr>
+                                <th rowSpan="2"><img src={TippingLogo} className="logo-image-large" alt="Burns" /></th>
+                                <th colSpan="2" className="highlight-large">Donut Burns</th>
+                            </tr>
+                            <tr>
+                                <th colSpan="2" className="distribute-body-burn">
+                                    Donuts spent on premium memberships are burned, leaving circulation and forever destroyed.
+                                    <br /><br />
+                                    In addition, ownership of the banner follows a <a href="https://medium.com/@simondlr/what-is-harberger-tax-where-does-the-blockchain-fit-in-1329046922c6" target="_blank" rel="noreferrer">Harberger Tax</a> system, in which the owner must pay a daily tax in order to retain ownership.  Donuts spent in this way are also burned, forever destroyed. 
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+            </div>
+            <div className="content">
                 <p className="left-body">Donuts are available to be traded on the following exchanges:</p>
                  
                 <table className="content-table">
@@ -121,10 +169,7 @@ class Donuts extends React.Component {
                 </table>
 
                 <br></br>
-                <p className="left-body">Following the ERC-20 token standard, Donuts are the first ever 
-                implementation of Reddit Community Points and the only Community Points token to currently 
-                exist on the Ethereum main net.</p>
-
+            </div>
             </div>
         );
     }

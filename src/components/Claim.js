@@ -21,7 +21,7 @@ class Claim extends React.Component {
                     <p>
                         <ul>
                             <li>your donuts will automatically appear in your wallet on the xDai sidechain.</li>
-                            <li>NOTE: Post any message in <a href="https://www.reddit.com/r/ethtrader/comments/ll8wwg/comment_to_receive_your_donut_distribution_on/" target="_blank" rel="noreferrer">this thread</a> to opt in for future xDai distributions</li>
+                            <li>NOTE: Post any message in <a href="https://www.reddit.com/r/ethtrader/comments/ll8wwg/comment_to_receive_your_donut_distribution_on/" target="_blank" rel="noreferrer">this thread</a> to opt in for future xDai distributions.</li>
                         </ul>
                     </p>
                 </div>

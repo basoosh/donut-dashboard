@@ -54,6 +54,13 @@ html {
   font-weight: bold;
 }
 
+.highlight-large {
+  color: rgb(255,182,222);
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+}
+
 .upArrow {
   margin-left: 4px;
   color: rgb(0, 142, 33);
@@ -150,6 +157,16 @@ html {
   margin-right: auto;
 }
 
+.content-middle-table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+}
+
+.spacer-row {
+  margin-bottom: 50px;
+}
+
 .how-to-table {
   margin-top: 5vmin;
   margin-left: 20px;
@@ -216,7 +233,6 @@ a {
   width: 100%;
   background-color: #1e151c;
   margin: auto;
-  padding: 10px;
   border-style: solid;
   border-width: 1px;
   border-image: linear-gradient(to left, #fe6d72 1%, #fe6dda 50%, #fe6d72 100%) 
@@ -227,6 +243,46 @@ a {
   margin: auto;
   width: 65%;
   background-color: #1e151c;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.container-middle {
+  width: 100%;
+  background-color: #271422;
+  margin: auto;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  border-style: solid;
+  border-width: 1px;
+  border-image: linear-gradient(to left, #fe6d72 1%, #fe6dda 50%, #fe6d72 100%) 
+                100% 0 100% 0/1px 0 1px 0 stretch;
+}
+
+.content-middle {
+  margin: auto;
+  width: 65%;
+}
+
+.left-body-middle {
+  text-align: left;
+  margin: 20px;
+}
+
+.distribute-header {
+  text-align: right;
+}
+
+.distribute-body {
+  font-weight: normal;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.distribute-body-burn {
+  font-weight: normal;
+  text-align: left;
+  padding-left: 25px;
 }
 
 .howToImg {
