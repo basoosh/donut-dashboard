@@ -7,6 +7,8 @@ import VotingLogo from '../img/donut-voting.png';
 import UniswapLogo from '../img/donut-uniswap.png';
 import HooLogo from '../img/donut-hoo.png';
 import HoneyswapLogo from '../img/donut-honeyswap.png';
+import DonutLogo from '../img/donut-overview.png';
+import BurnLogo from '../img/donut-burn.png';
 
 
 class Donuts extends React.Component {
@@ -87,7 +89,7 @@ class Donuts extends React.Component {
                     <table className="content-middle-table">
                         <tbody>
                             <tr>
-                                <th rowSpan="6"><img src={TippingLogo} className="logo-image-large" alt="Distribution" /></th>
+                                <th rowSpan="6"><img src={DonutLogo} className="logo-image-large" alt="Distribution" /></th>
                                 <th colSpan="2" className="highlight-large">Donut Distributions</th>
                             </tr>
                             <tr>
@@ -112,7 +114,7 @@ class Donuts extends React.Component {
                             </tr>
                             <tr className="spacer-row"><br /><br /><br /></tr>
                             <tr>
-                                <th rowSpan="2"><img src={TippingLogo} className="logo-image-large" alt="Burns" /></th>
+                                <th rowSpan="2"><img src={BurnLogo} className="logo-image-large" alt="Burns" /></th>
                                 <th colSpan="2" className="highlight-large">Donut Burns</th>
                             </tr>
                             <tr>

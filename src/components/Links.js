@@ -30,7 +30,7 @@ class Links extends React.Component {
                                 </a>
                             </th>
                             <th className="logo-column">
-                                <a href="http://www.donut.finance/"  target="_blank" rel="noreferrer">
+                                <a href="https://cloudflare-ipfs.com/ipfs/QmajDWDWim8r6muJP1DgFysEAiWVYFf5spw9itY5MgX24W"  target="_blank" rel="noreferrer">
                                     <img src={SteakLogo} alt="Steak Icon" className="logo-image-medium" />
                                 </a>
                             </th>
