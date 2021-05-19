@@ -1,26 +1,11 @@
 import React from 'react';
-import DonutLogo from '../img/donut-logo.png';
+import { ethers } from 'ethers';
+import SteakLogo from '../img/donut-steak.png';
 
 class Stake extends React.Component {
 
     constructor(props) {
       super(props);
-
-      this.state = {
-          isMetamaskConnected: false,
-          uniDonutBalance: 0,
-      }
-
-      this.formatNumber = this.formatNumber.bind(this);
-
-      //mainnet
-      const donutTokenAddress = "0xC0F9bD5Fa5698B6505F643900FFA515Ea5dF54A9";
-      const uniDonutTokenAddress = "0x718Dd8B743ea19d71BDb4Cb48BB984b73a65cE06";
-      const stakingContractAddress = "0x813fd5A7B6f6d792Bf9c03BBF02Ec3F08C9f98B2";
-      //goerli
-      /*const donutTokenAddress = "0x520e66be4b4308fe110808e99a7b22b90a94be1d";
-      const uniDonutTokenAddress = "0x1945aa1ce911f437ff242e7a93e418ee7f8a3273";
-      const stakingContractAddress = "0xF75CE1775435327238e4BE4FFdC6137a25B21F55";*/
 
       const erc20Abi = [
         // Read-Only Functions
@@ -34,10 +19,10 @@ class Stake extends React.Component {
         "function approve(address _spender, uint256 _amount) returns (bool success)",
         // Events
         "event Transfer(address indexed from, address indexed to, uint amount)"];
-        
+
       const uniTokenABi = erc20Abi.concat(
       ["function getReserves() public view returns (uint112 _reserve0, uint112 _reserve1, uint32 _blockTimestampLast)"]);
-        
+
       const stakingContractAbi = [
         "function balanceOf(address account) public view returns (uint256)",
         "function totalSupply() public view returns (uint256)",
@@ -50,28 +35,52 @@ class Stake extends React.Component {
         "function exit()",
         "function getReward()"];
 
-      let provider, signer, currentAddress;
-      let donutToken, uniDonutToken, stakingContract;
-      let ethBalance, donutBalance, uniDonutBalance, totalStaked, stakedByUser, claimableByUser;
-      let totalUniDonutSupply, donutsInUniswap;
-      let isApproved = false;
-      window.ethereum.enable().then(provider = new ethers.providers.Web3Provider(window.ethereum)).then(init).then(run).then();       
-    }
+      this.state = {
+          isMetamaskConnected: false,
+          xdaiDonutBalance: 0,
 
-    async init() {
-      signer = await provider.getSigner();
-      donutToken = new ethers.Contract(donutTokenAddress, erc20Abi, provider);
-      uniDonutToken = new ethers.Contract(uniDonutTokenAddress, uniTokenABi, signer);
-      stakingContract = new ethers.Contract(stakingContractAddress, stakingContractAbi, signer);
-      currentAddress = await signer.getAddress();
-      document.getElementById("ethAddress").innerHTML = currentAddress;
-      document.getElementById("metamaskStatus").style.display = "none";
+          provider: "",
+          signer: "",
+          currentAddress: "",
+
+          donutToken: "",
+          uniDonutToken: "",
+          stakingContract: "",
+
+          ethBalance: "",
+          donutBalance: "",
+          uniDonutBalance: "",
+          totalStaked: "",
+          stakedByUser: "",
+          claimableByUser: "",
+          
+          totalUniDonutSupply: "",
+          donutsInUniswap: "",
+
+          isApproved: false,
+          //Xdai Addresses
+          donutTokenAddress: "0x524B969793a64a602342d89BC2789D43a016B13A",
+          uniDonutTokenAddress: "0x077240a400b1740C8cD6f73DEa37DA1F703D8c00",
+          stakingContractAddress: "0x84b427415A23bFB57Eb94a0dB6a818EB63E2429D",
+      }
+
+      this.run = this.run.bind(this);
+      this.getBalances = this.getBalances.bind(this);
+      this.checkAllowance = this.checkAllowance.bind(this);
+      this.approveUniDonut = this.approveUniDonut.bind(this);
+      this.stake = this.stake.bind(this);
+      this.withdraw = this.withdraw.bind(this);
+      this.claimDonuts = this.claimDonuts.bind(this);
+      this.exit = this.exit.bind(this);
+
+      //window.ethereum.enable().then(provider = new ethers.providers.Web3Provider(window.ethereum)).then(init).then(run).then();       
     }
     
     async run() {
-      await getBalances();
-      await checkAllowance();
-      if(isApproved && !uniDonutBalance.isZero()) {
+      await this.getBalances();
+      await this.checkAllowance();
+      /*
+      if(this.isApproved && !this.uniDonutBalance.isZero()) {
         document.getElementById("stake").style.display = "block";
       }
       if(!stakedByUser.isZero()) {
@@ -82,93 +91,109 @@ class Stake extends React.Component {
         document.getElementById("userHasClaimable").style.display = "block";
       }
       document.getElementById("app").style.display = "block";
+      */
     }
     
     async getBalances() {
-      ethBalance = await signer.getBalance();
-      document.getElementById("ethBalance").innerHTML = parseFloat(ethers.utils.formatEther(ethBalance)).toFixed(2);
-      donutBalance = await donutToken.balanceOf(currentAddress);
-      document.getElementById("donutBalance").innerHTML = (donutBalance/1e18).toFixed(2);
-      uniDonutBalance = await uniDonutToken.balanceOf(currentAddress);
-      document.getElementById("uniDonutBalance").innerHTML = (uniDonutBalance/1e18).toFixed(2);
-      document.getElementById("uniDonutBalance2").innerHTML = (uniDonutBalance/1e18).toFixed(2);
-      totalStaked = await stakingContract.totalSupply();
-      document.getElementById("totalStaked").innerHTML = (totalStaked/1e18).toFixed(2);
-      stakedByUser = await stakingContract.balanceOf(currentAddress);
-      document.getElementById("stakedByUser").innerHTML = (stakedByUser/1e18).toFixed(2);
-      claimableByUser = await stakingContract.earned(currentAddress);
-      document.getElementById("claimableByUser").innerHTML = (claimableByUser/1e18).toFixed(2);
+      this.xdaiBalance = await this.signer.getBalance();
+      //document.getElementById("xdaiBalance").innerHTML = parseFloat(ethers.utils.formatEther(xdaiBalance)).toFixed(2);
+      this.donutBalance = await this.donutToken.balanceOf(this.currentAddress);
+      //document.getElementById("donutBalance").innerHTML = (donutBalance/1e18).toFixed(2);
+      this.uniDonutBalance = await this.uniDonutToken.balanceOf(this.currentAddress);
+      //document.getElementById("uniDonutBalance").innerHTML = (uniDonutBalance/1e18).toFixed(2);
+      //document.getElementById("uniDonutBalance2").innerHTML = (uniDonutBalance/1e18).toFixed(2);
+      this.totalStaked = await this.stakingContract.totalSupply();
+      //document.getElementById("totalStaked").innerHTML = (totalStaked/1e18).toFixed(2);
+      this.stakedByUser = await this.stakingContract.balanceOf(this.currentAddress);
+      //document.getElementById("stakedByUser").innerHTML = (stakedByUser/1e18).toFixed(2);
+      this.claimableByUser = await this.stakingContract.earned(this.currentAddress);
+      //document.getElementById("claimableByUser").innerHTML = (claimableByUser/1e18).toFixed(2);
       
-      totalUniDonutSupply = await uniDonutToken.totalSupply();
+      this.totalUniDonutSupply = await this.uniDonutToken.totalSupply();
+      /*
       let [wethInUniswap, donutsInUniswap, _] = await uniDonutToken.getReserves();
-      const stakedFraction = totalStaked/totalUniDonutSupply;
-      const effectiveStakedDonuts = stakedFraction*donutsInUniswap*2/1e18;
-      const rewardPerDayInDonuts = 24*60*60*(await stakingContract.rewardRate())/1e18;
+      const stakedFraction = this.totalStaked/this.totalUniDonutSupply;
+      const effectiveStakedDonuts = stakedFraction*this.donutsInUniswap*2/1e18;
+      const rewardPerDayInDonuts = 24*60*60*(await this.stakingContract.rewardRate())/1e18;
       const dailyRoi = rewardPerDayInDonuts/effectiveStakedDonuts;
       const yearlyRoi = dailyRoi*365;
       
       document.getElementById("dailyRoi").innerHTML = (dailyRoi*100).toFixed(4);
       document.getElementById("yearlyRoi").innerHTML = (yearlyRoi*100).toFixed(4);
-      const stakedByUserFraction = stakedByUser/totalUniDonutSupply;
+      const stakedByUserFraction = this.stakedByUser/this.totalUniDonutSupply;
       document.getElementById("donutLPStaked").innerHTML = (donutsInUniswap/1e18*stakedByUserFraction).toFixed(4);
       document.getElementById("ethLPStaked").innerHTML = (wethInUniswap/1e18*stakedByUserFraction).toFixed(4);
       document.getElementById("totalDonutLPStaked").innerHTML = (donutsInUniswap/1e18*stakedFraction).toFixed(4);
       document.getElementById("totalEthLPStaked").innerHTML = (wethInUniswap/1e18*stakedFraction).toFixed(4);
+      */
     }
     
     async checkAllowance() {
-      if(isApproved) return;
-      const allowance = await uniDonutToken.allowance(currentAddress, stakingContractAddress);
+      if(this.isApproved) return;
+      const allowance = await this.uniDonutToken.allowance(this.currentAddress, this.stakingContractAddress);
       //is approved?
       if(allowance.gte("0x7fffffffffffffffffffffffffffffff")) {
-        document.getElementById("approveButton").style.display = "none";
-        isApproved = true;
+        //document.getElementById("approveButton").style.display = "none";
+        this.isApproved = true;
       }
     }
     
     async approveUniDonut() {
-      let transactionResponse = await uniDonutToken.approve(stakingContractAddress, "0xffffffffffffffffffffffffffffffffffffffff");
-      transactionResponse.wait(1).then(run);
+      let transactionResponse = await this.uniDonutToken.approve(this.stakingContractAddress, "0xffffffffffffffffffffffffffffffffffffffff");
+      transactionResponse.wait(1).then(this.run);
     }
     
     async stake() {
-      let transactionResponse = await stakingContract.stake(uniDonutBalance);
-      transactionResponse.wait(1).then(run);
+      let transactionResponse = await this.stakingContract.stake(this.uniDonutBalance);
+      transactionResponse.wait(1).then(this.run);
     }
     
     async withdraw() {
-      let transactionResponse = await stakingContract.withdraw();
-      transactionResponse.wait(1).then(run);
+      let transactionResponse = await this.stakingContract.withdraw();
+      transactionResponse.wait(1).then(this.run);
     }
     
     async claimDonuts() {
-      let transactionResponse = await stakingContract.getReward();
-      transactionResponse.wait(1).then(run);
+      let transactionResponse = await this.stakingContract.getReward();
+      transactionResponse.wait(1).then(this.run);
     }
     
     async exit() {
-      let transactionResponse = await stakingContract.exit();
-      transactionResponse.wait(1).then(run);
+      let transactionResponse = await this.stakingContract.exit();
+      transactionResponse.wait(1).then(this.run);
     } 
 
     async componentDidMount() {
-        let donutStats = await getDonutStats();
-
+        let signer = await this.provider.getSigner();
+        let donutToken = new ethers.Contract(this.donutTokenAddress, this.erc20Abi, this.provider);
+        let uniDonutToken = new ethers.Contract(this.uniDonutTokenAddress, this.uniTokenABi, this.signer);
+        let stakingContract = new ethers.Contract(this.stakingContractAddress, this.stakingContractAbi, this.signer);
+        let currentAddress = await this.signer.getAddress();
+        // document.getElementById("ethAddress").innerHTML = currentAddress;
+        // document.getElementById("metamaskStatus").style.display = "none";
+  
         this.setState({
+          signer: signer,
+          donutToken: donutToken,
+          uniDonutToken: uniDonutToken,
+          stakingContract: stakingContract,
+          currentAddress: currentAddress
         });
+
+        this.run();
+        
     }
 
     render() {
         return (
             <div className="content">
-                <img src={DonutLogo} alt="Donut Logo" className="logo-image" />
+                <img src={SteakLogo} alt="Donut Logo" className="logo-image" />
                 <span className="title-text"><u>Staking Donuts</u></span>
-                <img src={DonutLogo} alt="Donut Logo" className="logo-image" />
 
-                <p>Additional donuts are granted to those that provide donut liquidity on Uniswap.  100,000 donuts are 
-                    distributed each week across UNI-V2 DONUT-ETH liquidity providers.</p>
+                <p>Additional donuts are granted to those that provide donut liquidity on Honeyswap.  200,000 donuts are 
+                    distributed each distribution period across DONUT-XDAI liquidity providers.</p>
 
-                <p>To participate in donut staking, first receive UNI-V2 DONUT-ETH tokens by 
+                <p>To participate in donut staking, first receive Honeyswap DONUT-ETH tokens by 
                     <a target="_blank" rel="noreferrer" href="https://app.uniswap.org/#/add/ETH/0xC0F9bD5Fa5698B6505F643900FFA515Ea5dF54A9">contributing liquidity
                     on Uniswap</a> (you will need an equal amount of DONUTs and ETH, in terms of USD).  
                     Then, add your DONUT-ETH tokens to the staking contract below.</p>

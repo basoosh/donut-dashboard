@@ -10,6 +10,7 @@ import Faq from './components/Faq';
 import Distribution from './components/Distribution'
 import Claim from './components/Claim'
 import Footer from './components/Footer'
+import Stake from './components/Stake'
 import './App.css';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
               <Route path="/register"><Register></Register></Route>
               <Route path="/claim"><Claim></Claim></Route>
               <Route path="/distribution"><Distribution></Distribution></Route>
+              <Route path="/stake"><Stake></Stake></Route>
             </Switch>
           </div>
           <div className="links-container">
