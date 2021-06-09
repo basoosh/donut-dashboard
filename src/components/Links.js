@@ -58,7 +58,7 @@ class Links extends React.Component {
                             </th>
                             <th className="logo-column">
                                 <a href="http://www.donut.finance/"  target="_blank" rel="noreferrer">
-                                    <span className="caption-link">Donut Staking</span>
+                                    <span className="caption-link">Main Net Donut Staking</span>
                                 </a>
                             </th>
                             <th className="logo-column">

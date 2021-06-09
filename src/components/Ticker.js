@@ -59,8 +59,8 @@ class Ticker extends React.Component {
         return (
             <div>
                 {this.state.isLoading ? <p>Loading Donut Price Information...</p> :
-                <div class="tcontainer"><div class="ticker-wrap"><div class="ticker-move">
-                    <div class="ticker-item">
+                <div className="tcontainer"><div className="ticker-wrap"><div className="ticker-move">
+                    <div className="ticker-item">
                         <img src={USD} alt="USD" className="ticker-logo" /> 
                         &nbsp;
                         ${this.state.donutUSD} <b>USD</b> 
@@ -70,7 +70,7 @@ class Ticker extends React.Component {
                         &nbsp;
                         (1 <b>USD</b> = {this.formatNumber(Math.ceil(this.state.usdDonut))} <b>DONUT</b>)
                     </div>
-                    <div class="ticker-item">
+                    <div className="ticker-item">
                         <img src={ETH} alt="ETH" className="ticker-logo" />
                         &nbsp;
                         {this.state.donutETH} <b>ETH</b>
@@ -80,7 +80,7 @@ class Ticker extends React.Component {
                         &nbsp;
                         (1 <b>ETH</b> = {this.formatNumber(Math.ceil(this.state.ethDonut))} <b>DONUT</b>)
                     </div>
-                    <div class="ticker-item">
+                    <div className="ticker-item">
                         <img src={BURRITO} alt="burrito" className="ticker-logo" />
                         &nbsp;
                         {this.state.donutBURRITO} <b>Burrito</b>
@@ -90,7 +90,7 @@ class Ticker extends React.Component {
                         &nbsp;
                         (1 <b>Burrito</b> = {this.formatNumber(Math.ceil(this.state.burritoDonut))} <b>DONUT</b>)
                     </div>
-                    <div class="ticker-item">
+                    <div className="ticker-item">
                         <img src={LAMBO} alt="lambo" className="ticker-logo" />
                         &nbsp;
                         {this.state.donutLAMBO} <b>Lambo</b>
@@ -100,14 +100,14 @@ class Ticker extends React.Component {
                         &nbsp;
                         (1 <b>Lambo</b> = {this.formatNumber(Math.ceil(this.state.lamboDonut))} <b>DONUT</b>)
                     </div>
-                    <div class="ticker-item">
+                    <div className="ticker-item">
                         <b>Marketcap:</b>
                         &nbsp;
                         ${this.formatNumber(Math.ceil(this.state.usdMarketCap))} <b>USD</b>
                         &nbsp;
                         ({this.formatNumber(Math.ceil(this.state.ethMarketCap))} <b>ETH</b>)
                     </div>
-                    <div class="ticker-item">
+                    <div className="ticker-item">
                         <b>24hr volume:</b>
                         &nbsp;
                         ${this.formatNumber(Math.ceil(this.state.usdVolume))} <b>USD</b>

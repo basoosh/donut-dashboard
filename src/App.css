@@ -182,6 +182,122 @@ html {
   width: 60%;
 }
 
+.staking-table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.staking-table th {
+  color: #fe6dda
+}
+
+.staking-number {
+  font-weight: bold
+}
+
+.content-center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.btn-active {background-image: linear-gradient(to right, #fe6dda 0%, #f7a597  51%, #fe6dda  100%)}
+.btn-active {
+   margin: 10px;
+   padding: 10px;
+   font-size: 20px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   font-weight: bold;
+   color: white;            
+   border-radius: 10px;
+   width: 300px;
+   height: 80px;
+ }
+
+ .btn-active:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
+
+ .three-col {
+   width: 33%
+ }
+
+.btn-harvest {background-image: linear-gradient(to right, #68c47c 0%, #6191c6  51%, #68c47c  100%)}
+.btn-harvest {
+   margin: 10px;
+   padding: 10px;
+   font-size: 20px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   font-weight: bold;
+   color: white;            
+   border-radius: 10px;
+   width: 300px;
+   height: 80px;
+   display: block;
+ }
+
+ .btn-harvest:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
+
+ .harvest-table {
+   margin-left: auto;
+   margin-right: auto;
+   width: 80%;
+   padding: 0px;
+ }
+
+ .harvest-table th {
+   color: #fe6dda
+ }
+
+ .rate-table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  padding: 0px;
+}
+
+.rate-table th {
+  color: #fe6dda
+}
+
+ .rate-number {
+  font-size: 40px;
+  font-weight: bold;
+ }
+
+ .harvest-number {
+  font-size: 70px;
+  font-weight: bold;
+ }
+
+.btn-disable {background-image: linear-gradient(to right, #818181 0%, #404040  51%, #818181  100%)}
+.btn-disable {
+   margin: 10px;
+   padding: 15px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   font-weight: bold;
+   color: white;            
+   border-radius: 10px;
+   width: 300px;
+   display: block;
+ }
+
 .spacer-row {
   margin-bottom: 50px;
 }
