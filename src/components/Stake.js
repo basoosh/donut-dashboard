@@ -2,6 +2,7 @@ import React from 'react';
 import { ethers } from 'ethers';
 import SteakLogo from '../img/donut-steak.png';
 import Loading from '../img/loading.gif';
+import Title from '../img/title-stake.png';
 
 class Stake extends React.Component {
 
@@ -344,7 +345,7 @@ class Stake extends React.Component {
 
         return (
             <div className="content">
-                <p className="title-text"><u>Staking Donuts</u></p>
+                <img src={Title} alt="Fresh Donuts" className="logo-image" />
                 <img src={SteakLogo} alt="Steak Logo" className="logo-image-medium" />
 
                 <p className="left-body">Additional donuts are granted to those that provide donut liquidity via Honeyswap on the XDai sidechain.  
