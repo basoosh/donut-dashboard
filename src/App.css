@@ -182,20 +182,6 @@ html {
   width: 60%;
 }
 
-.staking-table {
-  margin-left: auto;
-  margin-right: auto;
-  width: 80%;
-}
-
-.staking-table th {
-  color: #fe6dda
-}
-
-.staking-number {
-  font-weight: bold
-}
-
 .content-center {
   margin-left: auto;
   margin-right: auto;
@@ -206,7 +192,7 @@ html {
 .btn-active {
    margin: 10px;
    padding: 10px;
-   font-size: 20px;
+   font-size: 16px;
    text-align: center;
    text-transform: uppercase;
    transition: 0.5s;
@@ -214,11 +200,33 @@ html {
    font-weight: bold;
    color: white;            
    border-radius: 10px;
-   width: 300px;
+   width: 260px;
    height: 80px;
  }
 
  .btn-active:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
+
+.btn-withdraw {background-image: linear-gradient(to right, #fe6dda 0%, #f7a597  51%, #fe6dda  100%)}
+.btn-withdraw {
+   margin: 10px;
+   padding: 10px;
+   font-size: 16px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   font-weight: bold;
+   color: white;            
+   border-radius: 10px;
+   width: 260px;
+   height: 80px;
+ }
+
+ .btn-withdraw:hover {
    background-position: right center; /* change the direction of the change here */
    color: #fff;
    text-decoration: none;
@@ -232,7 +240,7 @@ html {
 .btn-harvest {
    margin: 10px;
    padding: 10px;
-   font-size: 20px;
+   font-size: 16px;
    text-align: center;
    text-transform: uppercase;
    transition: 0.5s;
@@ -240,9 +248,10 @@ html {
    font-weight: bold;
    color: white;            
    border-radius: 10px;
-   width: 300px;
+   width: 260px;
    height: 80px;
    display: block;
+   float: middle;
  }
 
  .btn-harvest:hover {
@@ -258,19 +267,29 @@ html {
    padding: 0px;
  }
 
- .harvest-table th {
+ .stake-header {
    color: #fe6dda
  }
+
+ @media only screen and (max-width: 768px) {
+  .harvest-table tr {    display: table;  width:100%;    }               
+  .harvest-table th {    display: table-row-group;  }        
+}
 
  .rate-table {
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  width: 100%;
   padding: 0px;
 }
 
-.rate-table th {
-  color: #fe6dda
+.rate-table td {
+  padding: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .rate-table tr {   display: table;  width:100%;    }               
+  .rate-table th {   display: table-row-group;  }     
 }
 
  .rate-number {
@@ -282,6 +301,21 @@ html {
   font-size: 70px;
   font-weight: bold;
  }
+
+ .staking-table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+@media only screen and (max-width: 768px) {
+  .staking-table tr {    display: table;  width:100%;    }               
+  .staking-table th {    display: table-row-group;  }        
+}
+
+.staking-number {
+  font-weight: bold
+} 
 
 .btn-disable {background-image: linear-gradient(to right, #818181 0%, #404040  51%, #818181  100%)}
 .btn-disable {

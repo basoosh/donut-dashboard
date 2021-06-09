@@ -260,11 +260,7 @@ class Stake extends React.Component {
     render() {
 
         let render = 
-              <div className="content">
-                  <div className="content-center">
-                    { this.state.isApproved ? <p></p> : 
-                    <button className="btn-active" id="approveButton" onClick={this.connectAccount}>Approve LP Token Spending</button>}
-                  </div>                
+              <div className="content">          
                   <div className="content-center">
                     { this.state.isApproved ? <p></p> : 
                     <button className="btn-active" id="approveButton" onClick={this.approveUniDonut}>Approve LP Token Spending</button>}
@@ -274,20 +270,13 @@ class Stake extends React.Component {
                     : <p></p> }
                   </div>
 
-                  { this.state.isApproved && this.state.stakedByUser ? 
+                  { this.state.isApproved ? 
                   <table className="harvest-table">
-                  <thead>
-                    <tr>
-                    { this.state.isApproved && this.state.claimableByUser > 0 ? <th>READY TO HARVEST</th> : <th></th>}
-                    <th></th>
-                    <th></th>
-                    </tr>
-                  </thead>
                   <tbody>
                     <tr>
-                    <td className="harvest-number">{ this.state.isApproved && this.state.claimableByUser > 0 ? this.state.claimableByUser : <p></p>}</td>
-                    <td>{ this.state.isApproved && this.state.claimableByUser > 0 ? <button className="btn-harvest" id="harvestButton" onClick={this.claimDonuts}>Harvest Donuts</button> : <p></p> }</td>
-                    <td>{ this.state.isApproved && this.state.stakedByUser > 0 ? <button className="btn-active" id="withdrawButton" onClick={this.withdraw}>Withdraw Staked LP Tokens</button> : <p></p> }</td>
+                    <th>{ this.state.isApproved && this.state.claimableByUser > 0 ? <div><span className="stake-header">READY TO HARVEST</span><br /> <span className="harvest-number">{this.state.claimableByUser}</span>DONUTS</div> : <p></p>}</th>
+                    <th>{ this.state.isApproved && this.state.claimableByUser > 0 ? <div className="content-center"><button className="btn-harvest" id="harvestButton" onClick={this.claimDonuts}>Harvest Donuts</button></div> : <p>You are currently staking, but don't have any donuts to harvest yet.  Return to this page later!</p> }</th>
+                    <th>{ this.state.isApproved && this.state.stakedByUser > 0 ? <div className="content-center"><button className="btn-withdraw" id="withdrawButton" onClick={this.withdraw}>Withdraw Staked LP Tokens</button></div> : <p></p> }</th>
                     </tr>
                   </tbody>
                   </table>
@@ -299,18 +288,20 @@ class Stake extends React.Component {
                   <table className="rate-table">
                   <thead>
                     <tr>
-                    <th className="three-col">24HR RETURN</th>
-                    <th className="three-col">ANNUAL RETURN</th>
-                    <th className="three-col">YOUR ESTIMATED DONUTS/DAY</th>
+                    <th className="three-col">
+                      <span className="stake-header">24HR RETURN</span><br />
+                      <span className="rate-number">{this.state.dailyRoi}%</span>
+                    </th>
+                    <th className="three-col">
+                      <span className="stake-header">ANNUAL RETURN</span><br />
+                      <span className="rate-number">{this.state.yearlyRoi}%</span>
+                    </th>
+                    <th className="three-col">
+                      <span className="stake-header">YOUR ESTIMATED DONUTS/DAY</span><br />
+                      { this.state.isApproved && this.state.stakedByUser > 0 ? <span className="rate-number">{this.state.estimatedDailyDonuts}</span> : <i>Requires Deposit</i> }
+                    </th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                    <td className="rate-number">{this.state.dailyRoi}%</td>
-                    <td className="rate-number">{this.state.yearlyRoi}%</td>
-                    <td>{ this.state.isApproved && this.state.stakedByUser > 0 ? <span className="rate-number">{this.state.estimatedDailyDonuts}</span> : <i>Requires Deposit</i> }</td>
-                    </tr>
-                  </tbody>
                   </table>
 
                   <br /><br />
@@ -318,7 +309,7 @@ class Stake extends React.Component {
                   <table className="staking-table">
                   <thead>
                     <tr>
-                    <th>YOUR STAKING DEPOSITS</th>
+                    <th className="stake-header">YOUR STAKING DEPOSITS</th>
                     </tr>
                   </thead>
                   <tbody>
