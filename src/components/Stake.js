@@ -77,6 +77,13 @@ class Stake extends React.Component {
           userXdaiStaked: 0,
           userDonutStaked: 0,
 
+          stakedFraction: 0,
+          stakedByUserFraction: 0,
+          heldByUserFraction: 0,
+
+          totalXdaiStaked: 0,
+          totalDonutStaked: 0,
+
           isLoading: true
       }
 
@@ -139,7 +146,7 @@ class Stake extends React.Component {
       totalUniDonutSupply = (totalUniDonutSupply/1e18).toFixed(3);
       
       let [donutsInUniswap, wxdaiInUniswap, _] = await this.state.uniDonutTokenContract.getReserves();
-      const stakedFraction = totalStaked/totalUniDonutSupply;
+      let stakedFraction = totalStaked/totalUniDonutSupply;
 
       wxdaiInUniswap = (wxdaiInUniswap/1e18).toFixed(0);
       donutsInUniswap = (donutsInUniswap/1e18).toFixed(0);
@@ -153,11 +160,19 @@ class Stake extends React.Component {
       dailyRoi = (dailyRoi*100).toFixed(3);
       yearlyRoi = (yearlyRoi*100).toFixed(3);
 
-      const stakedByUserFraction = stakedByUser/totalUniDonutSupply;
+      let stakedByUserFraction = stakedByUser/totalStaked;
+      let heldByUserFraction = stakedByUser/totalUniDonutSupply;
       const estimatedDailyDonuts = (stakedByUserFraction*rewardPerDayInDonuts).toFixed(3);
 
-      let userDonutStaked = (donutsInUniswap*stakedByUserFraction).toFixed(3);
-      let userXdaiStaked = (wxdaiInUniswap*stakedByUserFraction).toFixed(3);
+      let userDonutStaked = (donutsInUniswap*stakedByUserFraction).toFixed(0);
+      let userXdaiStaked = (wxdaiInUniswap*stakedByUserFraction).toFixed(2);
+
+      let totalDonutStaked = (donutsInUniswap*stakedFraction).toFixed(0);
+      let totalXdaiStaked = (wxdaiInUniswap*stakedFraction).toFixed(2);
+
+      stakedFraction = (stakedFraction*100).toFixed(3);
+      stakedByUserFraction = (stakedByUserFraction*100).toFixed(3);
+      heldByUserFraction = (heldByUserFraction*100).toFixed(3);
 
       this.setState({
         xdaiBalance: xdaiBalance,
@@ -173,6 +188,11 @@ class Stake extends React.Component {
         estimatedDailyDonuts: estimatedDailyDonuts,
         userDonutStaked: userDonutStaked,
         userXdaiStaked: userXdaiStaked,
+        stakedFraction: stakedFraction,
+        stakedByUserFraction: stakedByUserFraction,
+        heldByUserFraction: heldByUserFraction,
+        totalXdaiStaked: totalXdaiStaked,
+        totalDonutStaked: totalDonutStaked,
         isLoading: false
       });
     }
@@ -274,9 +294,10 @@ class Stake extends React.Component {
                   <table className="harvest-table">
                   <tbody>
                     <tr>
-                    <th>{ this.state.isApproved && this.state.claimableByUser > 0 ? <div><span className="stake-header">READY TO HARVEST</span><br /> <span className="harvest-number">{this.state.claimableByUser}</span>DONUTS</div> : <p></p>}</th>
-                    <th>{ this.state.isApproved && this.state.claimableByUser > 0 ? <div className="content-center"><button className="btn-harvest" id="harvestButton" onClick={this.claimDonuts}>Harvest Donuts</button></div> : <p>You are currently staking, but don't have any donuts to harvest yet.  Return to this page later!</p> }</th>
-                    <th>{ this.state.isApproved && this.state.stakedByUser > 0 ? <div className="content-center"><button className="btn-withdraw" id="withdrawButton" onClick={this.withdraw}>Withdraw Staked LP Tokens</button></div> : <p></p> }</th>
+                    <th>{ this.state.isApproved && this.state.claimableByUser > 0 ? <div><span className="stake-header">READY TO HARVEST</span><br /> <span className="harvest-number">{this.state.claimableByUser}</span>DONUTS</div> : <span></span>}</th>
+                    <th>{ this.state.isApproved && this.state.claimableByUser > 0 ? <div className="content-center"><button className="btn-harvest" id="harvestButton" onClick={this.claimDonuts}>Harvest Donuts</button></div> : <span></span> }</th>
+                    <th>{ this.state.stakedByUser > 0 && this.state.claimableByUser == 0 ? <p>You are currently staking, but don't have any donuts to harvest yet.  Return to this page later!</p> : <span></span> }</th>
+                    <th>{ this.state.isApproved && this.state.stakedByUser > 0 ? <div className="content-center"><button className="btn-withdraw" id="withdrawButton" onClick={this.withdraw}>Withdraw Staked LP Tokens</button></div> : <span></span> }</th>
                     </tr>
                   </tbody>
                   </table>
@@ -285,20 +306,16 @@ class Stake extends React.Component {
 
                   <br /><br />
 
-                  <table className="rate-table">
+                  <table className="staking-table">
                   <thead>
                     <tr>
-                    <th className="three-col">
+                    <th>
                       <span className="stake-header">24HR RETURN</span><br />
                       <span className="rate-number">{this.state.dailyRoi}%</span>
                     </th>
-                    <th className="three-col">
+                    <th>
                       <span className="stake-header">ANNUAL RETURN</span><br />
                       <span className="rate-number">{this.state.yearlyRoi}%</span>
-                    </th>
-                    <th className="three-col">
-                      <span className="stake-header">YOUR ESTIMATED DONUTS/DAY</span><br />
-                      { this.state.isApproved && this.state.stakedByUser > 0 ? <span className="rate-number">{this.state.estimatedDailyDonuts}</span> : <i>Requires Deposit</i> }
                     </th>
                     </tr>
                   </thead>
@@ -309,25 +326,57 @@ class Stake extends React.Component {
                   <table className="staking-table">
                   <thead>
                     <tr>
-                    <th className="stake-header">YOUR STAKING DEPOSITS</th>
+                    <th>
+                      <span className="stake-header">% OF LIQUIDITY STAKED</span><br />
+                      <span className="rate-number">{this.state.stakedFraction}%</span>
+                    </th>
+                    <th>
+                      <span className="stake-header">TOTAL STAKING DEPOSITS</span><br />
+                      <span className="staking-number">{this.state.totalStaked}</span> DONUT-XDAI LP<br />
+                      (<span className="staking-number">{this.state.totalDonutStaked}</span> DONUT<br />
+                      <span className="staking-number">{this.state.totalXdaiStaked}</span> XDAI)
+                    </th>
                     </tr>
                   </thead>
-                  <tbody>
-                      <tr>
-                          
-                      </tr>
-                      <tr>
-                          <td><span className="staking-number">{this.state.stakedByUser}</span> DONUT-XDAI LP</td>
-                      </tr>
-                      <tr>
-                          <td>(<span className="staking-number">{this.state.userDonutStaked}</span> DONUT</td>
-                      </tr>
-                      <tr>
-                          <td><span className="staking-number">{this.state.userXdaiStaked}</span> XDAI)</td>
-                      </tr>
+                  </table>
 
-                  </tbody>
-                  </table>   
+                  <br /><br />
+
+                  { this.state.isApproved && this.state.stakedByUser > 0 ?
+                  <table className="rate-table">
+                  <thead>
+                    <tr>
+                    <span className="stake-your-info-header">YOUR ESTIMATED DONUTS/DAY</span><br />
+                    <span className="rate-number">{this.state.estimatedDailyDonuts}</span>
+                    </tr>
+                  </thead>
+                  </table> : <p></p>  
+                  }
+
+                  { this.state.isApproved && this.state.stakedByUser > 0 ? <div><br /><br /></div> : <p></p> }
+
+                  { this.state.isApproved && this.state.stakedByUser > 0 ?
+                  <table className="rate-table">
+                  <thead>
+                    <tr>
+                    <th className="three-col">
+                      <span className="stake-your-info-header">YOUR STAKING DEPOSITS</span><br />
+                      <span className="staking-number">{this.state.stakedByUser}</span> DONUT-XDAI LP<br />
+                      (<span className="staking-number">{this.state.userDonutStaked}</span> DONUT<br />
+                      <span className="staking-number">{this.state.userXdaiStaked}</span> XDAI)
+                    </th>
+                    <th className="three-col">
+                      <span className="stake-your-info-header">YOUR % OWNERSHIP OF LIQUIDITY POOL</span><br />
+                      <span className="rate-number">{this.state.heldByUserFraction}%</span>
+                    </th>
+                    <th className="three-col">
+                      <span className="stake-your-info-header">YOUR % OWNERSHIP OF STAKED DONUTS</span><br />
+                      <span className="rate-number">{this.state.stakedByUserFraction}%</span>
+                    </th>
+                    </tr>
+                  </thead>
+                  </table> : <p></p>
+                  }
 
                   <br />
 
@@ -336,7 +385,7 @@ class Stake extends React.Component {
 
         return (
             <div className="content">
-                <img src={Title} alt="Fresh Donuts" className="logo-image" /><br />
+                <img src={Title} alt="Fresh Donuts" className="logo-image" /><br /><br />
                 <img src={SteakLogo} alt="Steak Logo" className="logo-image-medium" />
 
                 <p className="left-body">Additional donuts are granted to those that provide donut liquidity via Honeyswap on the XDai sidechain.  
