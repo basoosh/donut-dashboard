@@ -93,7 +93,7 @@ class Faq extends React.Component {
                 <div className="faq-odd">
                     <p className="faq-q">Q: How can I add donuts to my token list in Metamask?</p>
 
-                    <p className="faq-a">A: At the bottom of the assets tab, click the <span className="highlight">Add Token</span> button.  Click the <span className="highlight">Custom Token</span> tab.  In the <span className="highlight">Token Contract Address</span> input box, paste <span className="highlight">0xc0f9bd5fa5698b6505f643900ffa515ea5df54a9</span>.  (If you are adding Donuts on xDai, instead use <span className="highlight">0x524B969793a64a602342d89BC2789D43a016B13A</span>)</p>
+                    <p className="faq-a">A: You can visit the <a href="/#/track">Track Donuts</a> page and click the buttons to add.<br /><br />To manually add the tokens, at the bottom of the assets tab, click the <span className="highlight">Add Token</span> button.  Click the <span className="highlight">Custom Token</span> tab.  In the <span className="highlight">Token Contract Address</span> input box, paste <span className="highlight">0xc0f9bd5fa5698b6505f643900ffa515ea5df54a9</span>.  (If you are adding Donuts on xDai, instead use <span className="highlight">0x524B969793a64a602342d89BC2789D43a016B13A</span>)</p>
                 </div>
                 <div className="faq-odd">
                     <p className="faq-q">Q: What is CONTRIB?</p>

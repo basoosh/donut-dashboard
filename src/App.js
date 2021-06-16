@@ -11,6 +11,7 @@ import Distribution from './components/Distribution'
 import Claim from './components/Claim'
 import Footer from './components/Footer'
 import Stake from './components/Stake'
+import Track from './components/Track'
 import './App.css';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
               <Route path="/register"><Register></Register></Route>
               <Route path="/claim"><Claim></Claim></Route>
               <Route path="/distribution"><Distribution></Distribution></Route>
+              <Route path="/track"><Track></Track></Route>
               <Route path="/stake"><Stake></Stake></Route>
             </Switch>
           </div>

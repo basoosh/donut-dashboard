@@ -66,6 +66,7 @@ html {
 .highlight {
   color: rgb(255,182,222);
   font-weight: bold;
+  word-wrap: break-word;
 }
 
 .highlight-large {
@@ -210,6 +211,50 @@ html {
    text-decoration: none;
  }
 
+ .btn-main-net {background-image: linear-gradient(to right, #1a2ca3 0%, #1634fb  51%, #1a2ca3  100%)}
+.btn-main-net {
+  margin: 10px;
+  padding: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;            
+  border-radius: 10px;
+  width: 300px;
+  display: block;
+ }
+
+ .btn-main-net:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
+
+ .btn-xdai {background-image: linear-gradient(to right, #21921f 0%, #04d700  51%, #21921f  100%)}
+.btn-xdai {
+  margin: 10px;
+  padding: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;            
+  border-radius: 10px;
+  width: 300px;
+  display: block;
+ }
+
+ .btn-xdai:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
+
 .btn-withdraw {background-image: linear-gradient(to right, #fe6dda 0%, #f7a597  51%, #fe6dda  100%)}
 .btn-withdraw {
    margin: 10px;
@@ -336,6 +381,7 @@ html {
    transition: 0.5s;
    background-size: 200% auto;
    font-weight: bold;
+   font-size: 16px;
    color: white;            
    border-radius: 10px;
    width: 300px;
