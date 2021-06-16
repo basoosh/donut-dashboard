@@ -1,7 +1,7 @@
 import React from 'react';
 import { ethers } from 'ethers';
 import Loading from '../img/loading.gif';
-//import Title from '../img/title-track.png';
+import Title from '../img/title-track.png';
 import DonutLogo from '../img/donut-logo.png';
 
 class Track extends React.Component {
@@ -100,11 +100,9 @@ class Track extends React.Component {
                   </table>
                 </div>;
 
-        //<img src={Title} alt="Fresh Donuts" className="logo-image" /><br /><br />
-
         return (
             <div className="content">
-                
+                <img src={Title} alt="Tracking Donuts" className="logo-image" /><br /><br />    
             
                 <p className="left-body">Want to track donuts in your Metamask wallet?  First, connect your Metamask account to this site and the network of your choice.  Then click the below buttons:</p>    
                 

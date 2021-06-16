@@ -385,7 +385,7 @@ class Stake extends React.Component {
 
         return (
             <div className="content">
-                <img src={Title} alt="Fresh Donuts" className="logo-image" /><br /><br />
+                <img src={Title} alt="Staking Donuts" className="logo-image" /><br /><br />
                 <img src={SteakLogo} alt="Steak Logo" className="logo-image-medium" />
 
                 <p className="left-body">Additional donuts are granted to those that provide donut liquidity via Honeyswap on the XDai sidechain.  
