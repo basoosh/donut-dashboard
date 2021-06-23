@@ -23,7 +23,7 @@ class Distribution extends React.Component {
             <div className="content">
                 <img src={Title} alt="Fresh Donuts" className="logo-image" />
                 <br></br>
-                <i>The most recent distribution was started on April 18th, 2021.</i>
+                <i>The most recent distribution occurred on June 17th, 2021.</i>
                 <br></br>
                 
                 
@@ -50,7 +50,7 @@ class Distribution extends React.Component {
                                     {row.username}
                                 </th>
                                 <th className="contentColumn">
-                                    {row.points}
+                                    {row.points.toFixed(0)}
                                 </th>
                                 <th className="contentColumn">
                                     {row.contributor_type === "moderator" ? <span className="moderator">{row.contributor_type}</span> : <span>{row.contributor_type}</span> }
