@@ -162,10 +162,10 @@ class Stake extends React.Component {
 
       let stakedByUserFraction = stakedByUser/totalStaked;
       let heldByUserFraction = stakedByUser/totalUniDonutSupply;
-      const estimatedDailyDonuts = (stakedByUserFraction*rewardPerDayInDonuts).toFixed(3);
+      const estimatedDailyDonuts = (stakedByUserFraction*rewardPerDayInDonuts).toFixed(3);      
 
-      let userDonutStaked = (donutsInUniswap*stakedByUserFraction).toFixed(0);
-      let userXdaiStaked = (wxdaiInUniswap*stakedByUserFraction).toFixed(2);
+      let userDonutStaked = (donutsInUniswap*stakedByUserFraction*stakedFraction).toFixed(0);
+      let userXdaiStaked = (wxdaiInUniswap*stakedByUserFraction*stakedFraction).toFixed(2);
 
       let totalDonutStaked = (donutsInUniswap*stakedFraction).toFixed(0);
       let totalXdaiStaked = (wxdaiInUniswap*stakedFraction).toFixed(2);
