@@ -299,7 +299,8 @@ class Stake extends React.Component {
     async eventListeners() {
       window.ethereum.on('accountsChanged', (accounts) => {
         this.setState({
-          currentAddress: accounts[0]
+          currentAddress: accounts[0],
+          isLoading: true
         });
         if (this.state.network === 1 || this.state.network === 100) {
           this.getBalances();
@@ -309,7 +310,8 @@ class Stake extends React.Component {
 
       window.ethereum.on('chainChanged', (network) => {
         this.setState({
-          network: parseInt(network)
+          network: parseInt(network),
+          isLoading: true
         });
         if (this.state.network === 1 || this.state.network === 100) {
           this.getNetwork();
@@ -432,13 +434,13 @@ class Stake extends React.Component {
               <br /><br />
               <img src={SteakLogo} alt="Steak Logo" className="logo-image-medium" />
 
-              <p className="left-body">Additional donuts are granted to those that provide donut liquidity via Honeyswap on the XDai sidechain.  
-                  200,000 donuts are earned each 28-day period, distributed across DONUT-XDAI liquidity providers in real-time.</p>
+              <p className="left-body">Additional donuts are granted to those that provide donut trading liquidity via Uniswap v2 on the Ethereum main net 
+                  or Honeyswap on the XDai sidechain.  Staking rewards are earned in real-time.</p>
 
-              <p className="left-body">To participate in donut staking, first receive Honeyswap DONUT-XDAI tokens by <a target="_blank" rel="noreferrer" href="https://app.honeyswap.org/#/pool">contributing liquidity
-                  on Honeyswap</a> (you will need an equal value amount of DONUTs and XDAI, in terms of USD).  Once you provide liquidity, Honeyswap
-                  will credit your account with DONUT-XDAI tokens.  Add your DONUT-XDAI tokens to the staking contract using the interface 
-                  below.</p>
+              <p className="left-body">To participate in donut liquidity staking, first provide liquidity on the <a target="_blank" rel="noreferrer" 
+                  href="https://app.uniswap.org/#/pool/v2">Uniswap v2 ETH-DONUT</a> pair or <a target="_blank" rel="noreferrer" 
+                  href="https://app.honeyswap.org/#/pool">Honeyswap DONUT-XDAI</a> pair.  Once you provide liquidity, your account will be credited with 
+                  liquidity tokens.  Add those tokens to the staking contract using the interface below and you will immediately start earning donuts!</p>
 
               <div className="network-account">
                   { this.state.signer !== "" ? <span></span> : <span>NOT CONNECTED</span>}
