@@ -2,7 +2,6 @@ import React from 'react';
 import { ethers } from 'ethers';
 import Loading from '../img/loading.gif';
 import Title from '../img/title-track.png';
-import DonutLogo from '../img/donut-logo.png';
 
 class Track extends React.Component {
 
@@ -26,6 +25,7 @@ class Track extends React.Component {
       this.run = this.run.bind(this);      
       this.addDonutsMainNet = this.addDonutsMainNet.bind(this);
       this.addDonutsXDai = this.addDonutsXDai.bind(this);
+      this.eventListeners = this.eventListeners.bind(this);
 
       //window.ethereum.enable().then(provider = new ethers.providers.Web3Provider(window.ethereum)).then(init).then(run).then();    
     }
@@ -38,7 +38,7 @@ class Track extends React.Component {
     }
     
     async addDonutsMainNet() {
-      let transactionResponse = await window.ethereum.request({
+      await window.ethereum.request({
         method: 'wallet_watchAsset',
         params: {
           type: 'ERC20', 
@@ -53,7 +53,7 @@ class Track extends React.Component {
     }
 
     async addDonutsXDai() {
-        let transactionResponse = await window.ethereum.request({
+        await window.ethereum.request({
             method: 'wallet_watchAsset',
             params: {
               type: 'ERC20', 
@@ -70,18 +70,35 @@ class Track extends React.Component {
     async componentDidMount() {
       await window.ethereum.request({ method: 'eth_requestAccounts' });
       if (typeof window.ethereum !== 'undefined') {       
-        let provider = new ethers.providers.Web3Provider(window.ethereum);
+        let provider = new ethers.providers.Web3Provider(window.ethereum, "any");
         let signer = await provider.getSigner();
-
         let network = await provider.getNetwork();
+        let currentAddress = await signer.getAddress();
 
         this.setState({
             provider: provider,
             signer: signer,
-            network: network.chainId
+            network: network.chainId,
+            currentAddress: currentAddress
         });
+        this.eventListeners();
         this.run();
       }
+    }
+
+    // Event Listeners
+    async eventListeners() {
+      window.ethereum.on('accountsChanged', (accounts) => {
+        this.setState({
+          currentAddress: accounts[0]
+        });
+      });
+
+      window.ethereum.on('chainChanged', (network) => {
+        this.setState({
+          network: parseInt(network)
+        });
+      });
     }
 
     render() {
@@ -106,7 +123,14 @@ class Track extends React.Component {
             
                 <p className="left-body">Want to track donuts in your Metamask wallet?  First, connect your Metamask account to this site and the network of your choice.  Then click the below buttons:</p>    
                 
-                { this.state.isLoading ? <img src={Loading} /> : render }
+                <div className="network-account">
+                  { this.state.signer !== "" ? <span></span> : <span>NOT CONNECTED</span>}
+                  { this.state.network === 1 ? <span>ETHEREUM</span> : <span></span> }
+                  { this.state.network === 100 ? <span>XDAI</span> : <span></span> }
+                  { this.state.signer !== "" ? <span>&nbsp;| {this.state.currentAddress.substring(0,6)}...{this.state.currentAddress.substring(38,42)}</span> : <span></span>}
+                </div><br /><br />
+
+                { this.state.isLoading ? <img src={Loading} alt="Loading" /> : render }
 
             </div>
         );

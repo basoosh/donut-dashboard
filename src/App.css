@@ -249,6 +249,15 @@ html {
   display: block;
  }
 
+ .network-account {
+  background: rgb(83, 31, 68);
+  color: white;
+  font-weight: bold;
+  border-radius: 25px;
+  display: inline-block;
+  padding: 10px;
+ }
+
  .btn-xdai:hover {
    background-position: right center; /* change the direction of the change here */
    color: #fff;

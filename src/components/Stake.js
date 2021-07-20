@@ -61,10 +61,10 @@ class Stake extends React.Component {
           estimatedDailyDonuts: 0,
 
           isApproved: false,
-          //Xdai Addresses
-          donutTokenAddress: "0x524B969793a64a602342d89BC2789D43a016B13A",
-          uniDonutTokenAddress: "0x077240a400b1740C8cD6f73DEa37DA1F703D8c00",
-          stakingContractAddress: "0x84b427415A23bFB57Eb94a0dB6a818EB63E2429D",
+          
+          donutTokenAddress: "",
+          uniDonutTokenAddress: "",
+          stakingContractAddress: "",
 
           uniTokenAbi: uniTokenAbi,
           stakingContractAbi: stakingContractAbi,
@@ -89,37 +89,20 @@ class Stake extends React.Component {
 
       this.run = this.run.bind(this);
       this.getBalances = this.getBalances.bind(this);
+      this.getNetwork = this.getNetwork.bind(this);
       this.checkAllowance = this.checkAllowance.bind(this);
       this.approveUniDonut = this.approveUniDonut.bind(this);
       this.stake = this.stake.bind(this);
       this.withdraw = this.withdraw.bind(this);
       this.claimDonuts = this.claimDonuts.bind(this);
       this.exit = this.exit.bind(this);
-
-      //window.ethereum.enable().then(provider = new ethers.providers.Web3Provider(window.ethereum)).then(init).then(run).then();    
+      this.eventListeners = this.eventListeners.bind(this);
     }
     
     async run() {
-
-      this.getBalances();
-
       this.setState({
         isLoading: false
       });
-      
-      /*
-      if(this.isApproved && !this.uniDonutBalance.isZero()) {
-        document.getElementById("stake").style.display = "block";
-      }
-      if(!stakedByUser.isZero()) {
-        document.getElementById("userIsStaking").style.display = "block";
-        document.getElementById("userIsStaking2").style.display = "inline";
-      }
-      if(!claimableByUser.isZero()) {
-        document.getElementById("userHasClaimable").style.display = "block";
-      }
-      document.getElementById("app").style.display = "block";
-      */
     }
     
     async getBalances() {
@@ -145,7 +128,14 @@ class Stake extends React.Component {
       let totalUniDonutSupply = await this.state.uniDonutTokenContract.totalSupply();
       totalUniDonutSupply = (totalUniDonutSupply/1e18).toFixed(3);
       
-      let [donutsInUniswap, wxdaiInUniswap, _] = await this.state.uniDonutTokenContract.getReserves();
+      //On main net, the pair is ETH-DONUT.  On xdai, the pair is DONUT-XDAI.  Order of tokens matters here for assigning values.
+      let donutsInUniswap, wxdaiInUniswap;
+      if (this.state.network === 1) {
+        [wxdaiInUniswap, donutsInUniswap] = await this.state.uniDonutTokenContract.getReserves();  
+      }
+      if (this.state.network === 100) {
+        [donutsInUniswap, wxdaiInUniswap] = await this.state.uniDonutTokenContract.getReserves();  
+      }
       let stakedFraction = totalStaked/totalUniDonutSupply;
 
       wxdaiInUniswap = (wxdaiInUniswap/1e18).toFixed(0);
@@ -194,6 +184,51 @@ class Stake extends React.Component {
         totalXdaiStaked: totalXdaiStaked,
         totalDonutStaked: totalDonutStaked,
         isLoading: false
+      });
+    }
+
+    async getNetwork() {
+      let provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+      let signer = await provider.getSigner();
+      let currentAddress = await signer.getAddress();
+      let network = await (await provider.getNetwork()).chainId;
+
+      let donutTokenAddress;
+      let uniDonutTokenAddress;
+      let stakingContractAddress;  
+
+      //Main Net Addresses
+      if (network === 1) {
+        donutTokenAddress = "0xC0F9bD5Fa5698B6505F643900FFA515Ea5dF54A9";
+        uniDonutTokenAddress = "0x718Dd8B743ea19d71BDb4Cb48BB984b73a65cE06";
+        stakingContractAddress = "0x813fd5A7B6f6d792Bf9c03BBF02Ec3F08C9f98B2";  
+      }
+      
+      //Xdai Addresses
+      if (network === 100) {
+        donutTokenAddress = "0x524B969793a64a602342d89BC2789D43a016B13A";
+        uniDonutTokenAddress = "0x077240a400b1740C8cD6f73DEa37DA1F703D8c00";
+        stakingContractAddress = "0x84b427415A23bFB57Eb94a0dB6a818EB63E2429D";
+      }
+
+      // Create contract objects from address and ABI
+      let donutTokenContract = new ethers.Contract(donutTokenAddress, this.state.erc20Abi, signer);
+      let uniDonutTokenContract = new ethers.Contract(uniDonutTokenAddress, this.state.uniTokenAbi, signer);
+      let stakingContract = new ethers.Contract(stakingContractAddress, this.state.stakingContractAbi, signer);
+
+      this.setState({
+        signer: signer,
+        provider: provider,
+        currentAddress: currentAddress,
+        network: network,
+
+        donutTokenContract: donutTokenContract,
+        uniDonutTokenContract: uniDonutTokenContract,
+        stakingContract: stakingContract,
+
+        donutTokenAddress: donutTokenAddress,          
+        uniDonutTokenAddress: uniDonutTokenAddress,
+        stakingContractAddress: stakingContractAddress,        
       });
     }
     
@@ -249,32 +284,39 @@ class Stake extends React.Component {
       await window.ethereum.request({ method: 'eth_requestAccounts' });
       if (typeof window.ethereum !== 'undefined') {
         
-        let provider = new ethers.providers.Web3Provider(window.ethereum);
-        let signer = await provider.getSigner();
-        let currentAddress = await signer.getAddress();
+        await this.getNetwork();
 
-        let donutTokenContract = new ethers.Contract(this.state.donutTokenAddress, this.state.erc20Abi, signer);
-        let uniDonutTokenContract = new ethers.Contract(this.state.uniDonutTokenAddress, this.state.uniTokenAbi, signer);
-        let stakingContract = new ethers.Contract(this.state.stakingContractAddress, this.state.stakingContractAbi, signer);
-        
-        this.setState({
-          signer: signer,
-          provider: provider,
-          donutTokenContract: donutTokenContract,
-          uniDonutTokenContract: uniDonutTokenContract,
-          stakingContract: stakingContract,
-          currentAddress: currentAddress
-        });
-
-        try {
+        if (this.state.network === 1 || this.state.network === 100) {
           await this.getBalances();
           await this.checkAllowance();
-        } catch (err) {
-          console.log("Error: ", err)
+          this.eventListeners();
         }
       }
 
-        this.run();
+      this.run();
+    }
+
+    async eventListeners() {
+      window.ethereum.on('accountsChanged', (accounts) => {
+        this.setState({
+          currentAddress: accounts[0]
+        });
+        if (this.state.network === 1 || this.state.network === 100) {
+          this.getBalances();
+          this.checkAllowance();
+        }
+      });
+
+      window.ethereum.on('chainChanged', (network) => {
+        this.setState({
+          network: parseInt(network)
+        });
+        if (this.state.network === 1 || this.state.network === 100) {
+          this.getNetwork();
+          this.getBalances();
+          this.checkAllowance();
+        }
+      });
     }
 
     render() {
@@ -296,7 +338,7 @@ class Stake extends React.Component {
                     <tr>
                     <th>{ this.state.isApproved && this.state.claimableByUser > 0 ? <div><span className="stake-header">READY TO HARVEST</span><br /> <span className="harvest-number">{this.state.claimableByUser}</span>DONUTS</div> : <span></span>}</th>
                     <th>{ this.state.isApproved && this.state.claimableByUser > 0 ? <div className="content-center"><button className="btn-harvest" id="harvestButton" onClick={this.claimDonuts}>Harvest Donuts</button></div> : <span></span> }</th>
-                    <th>{ this.state.stakedByUser > 0 && this.state.claimableByUser == 0 ? <p>You are currently staking, but don't have any donuts to harvest yet.  Return to this page later!</p> : <span></span> }</th>
+                    <th>{ this.state.stakedByUser > 0 && this.state.claimableByUser === 0 ? <p>You are currently staking, but don't have any donuts to harvest yet.  Return to this page later!</p> : <span></span> }</th>
                     <th>{ this.state.isApproved && this.state.stakedByUser > 0 ? <div className="content-center"><button className="btn-withdraw" id="withdrawButton" onClick={this.withdraw}>Withdraw Staked LP Tokens</button></div> : <span></span> }</th>
                     </tr>
                   </tbody>
@@ -332,9 +374,9 @@ class Stake extends React.Component {
                     </th>
                     <th>
                       <span className="stake-header">TOTAL STAKING DEPOSITS</span><br />
-                      <span className="staking-number">{this.state.totalStaked}</span> DONUT-XDAI LP<br />
+                      <span className="staking-number">{this.state.totalStaked}</span> { this.state.network===1 && <span>(ETH-DONUT)</span> }{ this.state.network===100 && <span>(DONUT-XDAI)</span> } LP<br />
                       (<span className="staking-number">{this.state.totalDonutStaked}</span> DONUT<br />
-                      <span className="staking-number">{this.state.totalXdaiStaked}</span> XDAI)
+                      <span className="staking-number">{this.state.totalXdaiStaked}</span> { this.state.network===1 && <span>ETH</span> }{ this.state.network===100 && <span>XDAI</span> })
                     </th>
                     </tr>
                   </thead>
@@ -361,9 +403,9 @@ class Stake extends React.Component {
                     <tr>
                     <th className="three-col">
                       <span className="stake-your-info-header">YOUR STAKING DEPOSITS</span><br />
-                      <span className="staking-number">{this.state.stakedByUser}</span> DONUT-XDAI LP<br />
+                      <span className="staking-number">{this.state.stakedByUser}</span> { this.state.network===1 && <span>(ETH-DONUT)</span> }{ this.state.network===100 && <span>(DONUT-XDAI)</span> } LP<br />
                       (<span className="staking-number">{this.state.userDonutStaked}</span> DONUT<br />
-                      <span className="staking-number">{this.state.userXdaiStaked}</span> XDAI)
+                      <span className="staking-number">{this.state.userXdaiStaked}</span> { this.state.network===1 && <span>ETH</span> }{ this.state.network===100 && <span>XDAI</span> })
                     </th>
                     <th className="three-col">
                       <span className="stake-your-info-header">YOUR % OWNERSHIP OF LIQUIDITY POOL</span><br />
@@ -385,19 +427,27 @@ class Stake extends React.Component {
 
         return (
             <div className="content">
-                <img src={Title} alt="Staking Donuts" className="logo-image" /><br /><br />
-                <img src={SteakLogo} alt="Steak Logo" className="logo-image-medium" />
+              <img src={Title} alt="Staking Donuts" className="logo-image" />                
+              
+              <br /><br />
+              <img src={SteakLogo} alt="Steak Logo" className="logo-image-medium" />
 
-                <p className="left-body">Additional donuts are granted to those that provide donut liquidity via Honeyswap on the XDai sidechain.  
-                    200,000 donuts are earned each 28-day period, distributed across DONUT-XDAI liquidity providers in real-time.</p>
+              <p className="left-body">Additional donuts are granted to those that provide donut liquidity via Honeyswap on the XDai sidechain.  
+                  200,000 donuts are earned each 28-day period, distributed across DONUT-XDAI liquidity providers in real-time.</p>
 
-                <p className="left-body">To participate in donut staking, first receive Honeyswap DONUT-XDAI tokens by <a target="_blank" rel="noreferrer" href="https://app.honeyswap.org/#/pool">contributing liquidity
-                    on Honeyswap</a> (you will need an equal value amount of DONUTs and XDAI, in terms of USD).  Once you provide liquidity, Honeyswap
-                    will credit your account with DONUT-XDAI tokens.  Add your DONUT-XDAI tokens to the staking contract using the interface 
-                    below.</p>
-                    
-                
-                { this.state.isLoading ? <img src={Loading} /> : render }
+              <p className="left-body">To participate in donut staking, first receive Honeyswap DONUT-XDAI tokens by <a target="_blank" rel="noreferrer" href="https://app.honeyswap.org/#/pool">contributing liquidity
+                  on Honeyswap</a> (you will need an equal value amount of DONUTs and XDAI, in terms of USD).  Once you provide liquidity, Honeyswap
+                  will credit your account with DONUT-XDAI tokens.  Add your DONUT-XDAI tokens to the staking contract using the interface 
+                  below.</p>
+
+              <div className="network-account">
+                  { this.state.signer !== "" ? <span></span> : <span>NOT CONNECTED</span>}
+                  { this.state.network === 1 ? <span>ETHEREUM</span> : <span></span> }
+                  { this.state.network === 100 ? <span>XDAI</span> : <span></span> }
+                  { this.state.signer !== "" ? <span>&nbsp;| {this.state.currentAddress.substring(0,6)}...{this.state.currentAddress.substring(38,42)}</span> : <span></span>}
+              </div><br /><br />
+                                
+              { this.state.isLoading ? <img src={Loading} alt="Loading" /> : render }
                   
             </div>
         );
