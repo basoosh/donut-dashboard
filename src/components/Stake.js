@@ -1,8 +1,9 @@
 import React from 'react';
-import { ethers } from 'ethers';
+import { ethers, utils } from 'ethers';
 import SteakLogo from '../img/donut-steak.png';
 import Loading from '../img/loading.gif';
 import Title from '../img/title-stake.png';
+import { GrowlScene, growl } from '@crystallize/react-growl';
 
 class Stake extends React.Component {
 
@@ -35,7 +36,8 @@ class Stake extends React.Component {
         "function stake(uint128 amount)",
         "function withdraw()",
         "function exit()",
-        "function getReward()"];
+        "function getReward()",
+        "event RewardPaid(address indexed user, uint256 reward)"];
 
       this.state = {
           isMetamaskConnected: false,
@@ -88,6 +90,7 @@ class Stake extends React.Component {
       }
 
       this.run = this.run.bind(this);
+      this.refresh = this.refresh.bind(this);
       this.getBalances = this.getBalances.bind(this);
       this.getNetwork = this.getNetwork.bind(this);
       this.checkAllowance = this.checkAllowance.bind(this);
@@ -96,10 +99,19 @@ class Stake extends React.Component {
       this.withdraw = this.withdraw.bind(this);
       this.claimDonuts = this.claimDonuts.bind(this);
       this.exit = this.exit.bind(this);
+      this.rewardPaid = this.rewardPaid.bind(this);
       this.eventListeners = this.eventListeners.bind(this);
     }
     
     async run() {
+      this.setState({
+        isLoading: false
+      });
+    }
+
+    async refresh() {
+      await this.getBalances();
+
       this.setState({
         isLoading: false
       });
@@ -245,7 +257,7 @@ class Stake extends React.Component {
     
     async approveUniDonut() {
       let transactionResponse = await this.state.uniDonutTokenContract.approve(this.state.stakingContractAddress, "0xffffffffffffffffffffffffffffffffffffffff");
-      transactionResponse.wait(1).then(this.run);
+      transactionResponse.wait(1).then(this.refresh);
     }
     
     async stake() {
@@ -253,7 +265,7 @@ class Stake extends React.Component {
       this.setState({
         isLoading: true
       });
-      transactionResponse.wait(1).then(this.run);
+      transactionResponse.wait(1).then(this.refresh);
     }
     
     async withdraw() {
@@ -261,7 +273,7 @@ class Stake extends React.Component {
       this.setState({
         isLoading: true
       });
-      transactionResponse.wait(1).then(this.run);
+      transactionResponse.wait(1).then(this.refresh);
     }
     
     async claimDonuts() {
@@ -269,7 +281,7 @@ class Stake extends React.Component {
       this.setState({
         isLoading: true
       });
-      transactionResponse.wait(1).then(this.run);
+      transactionResponse.wait(1).then(this.refresh);
     }
     
     async exit() {
@@ -277,7 +289,7 @@ class Stake extends React.Component {
       this.setState({
         isLoading: true
       });
-      transactionResponse.wait(1).then(this.run);
+      transactionResponse.wait(1).then(this.refresh);
     } 
 
     async componentDidMount() {
@@ -297,6 +309,7 @@ class Stake extends React.Component {
     }
 
     async eventListeners() {
+      //Event listener for user changing metamask account
       window.ethereum.on('accountsChanged', (accounts) => {
         this.setState({
           currentAddress: accounts[0],
@@ -308,6 +321,7 @@ class Stake extends React.Component {
         }
       });
 
+      //Event listener for user changing metamask network
       window.ethereum.on('chainChanged', (network) => {
         this.setState({
           network: parseInt(network),
@@ -319,6 +333,22 @@ class Stake extends React.Component {
           this.checkAllowance();
         }
       });
+
+      //Event listener for RewardPaid
+      this.state.stakingContract.on('RewardPaid', (sender, donuts, event) => {
+        let amount = (donuts/1e18).toFixed(3);
+        if (sender === this.state.currentAddress) {
+          this.rewardPaid(amount);
+        }
+      });
+    }
+
+    async rewardPaid(amount) {
+      const myGrowl = await growl({
+        title: "Donuts successfully claimed!",
+        message: amount + ' donuts harvested, fresh from the bakery.',
+        timeout: 5000
+    });
     }
 
     render() {
@@ -340,7 +370,7 @@ class Stake extends React.Component {
                     <tr>
                     <th>{ this.state.isApproved && this.state.claimableByUser > 0 ? <div><span className="stake-header">READY TO HARVEST</span><br /> <span className="harvest-number">{this.state.claimableByUser}</span>DONUTS</div> : <span></span>}</th>
                     <th>{ this.state.isApproved && this.state.claimableByUser > 0 ? <div className="content-center"><button className="btn-harvest" id="harvestButton" onClick={this.claimDonuts}>Harvest Donuts</button></div> : <span></span> }</th>
-                    <th>{ this.state.stakedByUser > 0 && this.state.claimableByUser === 0 ? <p>You are currently staking, but don't have any donuts to harvest yet.  Return to this page later!</p> : <span></span> }</th>
+                    <th>{ this.state.stakedByUser > 0 && this.state.claimableByUser < 0.001 ? <p>You are currently staking, but don't have any donuts to harvest yet.  Return to this page later!</p> : <span></span> }</th>
                     <th>{ this.state.isApproved && this.state.stakedByUser > 0 ? <div className="content-center"><button className="btn-withdraw" id="withdrawButton" onClick={this.withdraw}>Withdraw Staked LP Tokens</button></div> : <span></span> }</th>
                     </tr>
                   </tbody>
@@ -429,6 +459,7 @@ class Stake extends React.Component {
 
         return (
             <div className="content">
+              <GrowlScene />
               <img src={Title} alt="Staking Donuts" className="logo-image" />                
               
               <br /><br />
