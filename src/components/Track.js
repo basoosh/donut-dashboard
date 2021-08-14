@@ -46,7 +46,7 @@ class Track extends React.Component {
             address: this.state.mainNetDonutTokenAddress, 
             symbol: "DONUT", 
             decimals: 18, 
-            image: "https://donut-dashboard.com/static/media/donut-logo.b4501f7a.png", 
+            image: "https://donut-dashboard.com/static/media/donut-logo.b1e2b1be.png", 
           },
         },
       });
@@ -61,7 +61,7 @@ class Track extends React.Component {
                 address: this.state.xdaiDonutTokenAddress, 
                 symbol: "DONUT", 
                 decimals: 18, 
-                image: "https://donut-dashboard.com/static/media/donut-logo.b4501f7a.png", 
+                image: "https://donut-dashboard.com/static/media/donut-logo.b1e2b1be.png", 
               },
             },
           });
