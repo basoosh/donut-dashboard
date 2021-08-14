@@ -9,6 +9,10 @@ class Claim extends React.Component {
                 <img src={Title} alt="How to claim donuts" className="logo-image" />
                 
                 <div className="left-body">
+                    <p>Donuts are distributed every 28 days in batches.  By default, users can claim their donuts on the Ethereum main net once the
+                        distribution has occurred.  Users can optionally receive their donuts on the xDai sidechain instead, to avoid gas fees.
+                    </p>
+
                     <p className="heading">If claiming on the <span className="highlight">Ethereum Main Net</span>,</p>
                     
                         <ul>
