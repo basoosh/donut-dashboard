@@ -40,19 +40,19 @@ class Faq extends React.Component {
                     <p className="faq-a">A: Upvotes help users earn more donuts, but it is not a 1:1 relationship.  The donuts earned by an individual at the end of the month depends on the total karma earned by all users.  Additionally, posts flaired Comedy and Media earn 10% as many donuts as other posts, per community vote.</p>
                 </div>
                 <div className="faq-even">
-                    <p className="faq-q">Q: How often are new donuts minted?</p>
+                    <p className="faq-q">Q: How often are new donuts minted and distributed?</p>
 
                     <p className="faq-a">A: A fresh batch of donuts is baked every 4 weeks.</p>
                 </div>
                 <div className="faq-odd">
                     <p className="faq-q">Q: How many new donuts are minted in each batch?</p>
 
-                    <p className="faq-a">A: 4 million donuts are created in each batch, with an additional 400,000 for liquidity incentives.</p>
+                    <p className="faq-a">A: 4 million donuts are created in each batch.</p>
                 </div>
                 <div className="faq-even">
                     <p className="faq-q">Q: How many donuts are in circulation?</p>
 
-                    <p className="faq-a">A: About 120 million at the time of writing. You can view up-to-date statistics on the <a href="https://etherscan.io/token/0xc0f9bd5fa5698b6505f643900ffa515ea5df54a9" target="_blank" rel="noreferrer">etherscan donut page</a>.</p>
+                    <p className="faq-a">A: About 140 million at the time of writing. You can view up-to-date statistics on the <a href="https://etherscan.io/token/0xc0f9bd5fa5698b6505f643900ffa515ea5df54a9" target="_blank" rel="noreferrer">etherscan donut page</a>.</p>
                 </div>
                 <div className="faq-odd">
                     <p className="faq-q">Q: Do any donuts ever leave circulation?</p>
@@ -70,12 +70,12 @@ class Faq extends React.Component {
                 <div className="faq-odd">
                     <p className="faq-q">Q: Gas fees are extremely high.  How can I save money on retrieving my donuts?</p>
 
-                    <p className="faq-a">A: /r/ethtrader is currently experimenting with distributing donuts on xDai.  Visit <a href="https://www.reddit.com/r/ethtrader/comments/p5ik6b/donuts_xdai_optin_thread/" target="_blank" rel="noreferrer">this thread</a> to signal you would like to receive future donuts on xDai instead of main net.  Beyond that, you can batch multiple claims into a single transaction or wait for cheaper gas costs to come.</p>
+                    <p className="faq-a">A: /r/ethtrader is currently experimenting with distributing donuts on xDai.  Visit <a href="https://www.reddit.com/r/ethtrader/comments/p5ik6b/donuts_xdai_optin_thread/" target="_blank" rel="noreferrer">this thread</a> to signal you would like to receive future donuts on xDai instead of main net.</p>
                 </div>
                 <div className="faq-even">
                     <p className="faq-q">Q: Will I lose my donuts if I don't claim them right away?</p>
 
-                    <p className="faq-a">A: Donuts can be claimed any time later on. Multiple batches can even be claimed as part of the same transaction. (this refers to decentralized donuts only, see below about centralized donuts from 2018/2019 which are now moldy)</p>
+                    <p className="faq-a">A: Donuts can be claimed any time later on.</p>
                 </div>
                 <div className="faq-odd">
                     <p className="faq-q">Q: I had donuts from 2018-2019, can I still claim them?</p>
@@ -115,7 +115,7 @@ class Faq extends React.Component {
                     <p className="faq-q">Q: Is this idea of community points being tried elsewhere on Reddit?</p>
 
                     <p className="faq-a">A: Yes. Both r/cryptocurrency and r/FortNiteBR have a test implementation of Reddit community points implemented. Both of those currencies are running on Ethereum test networks. Donuts are the only implementation running on the Ethereum mainnet.</p>
-                    <p className="faq-a">Ethereum scaling is necessary if the idea is to be fully rolled out, however. Reddit launched the "Scaling Bake-Off" in Summer 2020 to see what layer 2 scaling solutions could potentially accomplish this. Reddit also announced a partnership with the Ethereum Foundation in January 2021 to work together and tackle the scaling problem.</p>
+                    <p className="faq-a">Ethereum scaling is necessary if the idea is to be fully rolled out, however.  Reddit plans to use an Arbitrum-based rollup strategy to tackle the scaling issue.</p>
                 </div>
 
             </div>
