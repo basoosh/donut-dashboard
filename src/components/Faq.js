@@ -70,7 +70,7 @@ class Faq extends React.Component {
                 <div className="faq-odd">
                     <p className="faq-q">Q: Gas fees are extremely high.  How can I save money on retrieving my donuts?</p>
 
-                    <p className="faq-a">A: /r/ethtrader is currently experimenting with distributing donuts on xDai.  Visit <a href="https://www.reddit.com/r/ethtrader/comments/ll8wwg/comment_to_receive_your_donut_distribution_on/" target="_blank" rel="noreferrer">this thread</a> to signal you would like to receive future donuts on xDai instead of main net.  Beyond that, you can batch multiple claims into a single transaction or wait for cheaper gas costs to come.</p>
+                    <p className="faq-a">A: /r/ethtrader is currently experimenting with distributing donuts on xDai.  Visit <a href="https://www.reddit.com/r/ethtrader/comments/p5ik6b/donuts_xdai_optin_thread/" target="_blank" rel="noreferrer">this thread</a> to signal you would like to receive future donuts on xDai instead of main net.  Beyond that, you can batch multiple claims into a single transaction or wait for cheaper gas costs to come.</p>
                 </div>
                 <div className="faq-even">
                     <p className="faq-q">Q: Will I lose my donuts if I don't claim them right away?</p>
