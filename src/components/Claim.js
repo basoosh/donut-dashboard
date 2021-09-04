@@ -13,7 +13,7 @@ class Claim extends React.Component {
                         distribution has occurred.  Users can optionally receive their donuts on the xDai sidechain instead, to avoid gas fees.
                     </p>
 
-                    <p className="heading">If claiming on the <span className="highlight">Ethereum Main Net</span>,</p>
+                    <p className="heading">If claiming on the <span className="highlight">Ethereum main net</span>,</p>
                     
                         <ul>
                             <li>visit this <a href="https://ipfs.io/ipfs/QmSyCgXH8UzVgQz1Liuskq34rN2nRZXWUJrpkBNWXbrTdj" target="_blank" rel="noreferrer">link</a>, connect your Metamask wallet, and click <span className="highlight">Claim</span>.</li>
