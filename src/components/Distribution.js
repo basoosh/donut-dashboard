@@ -15,7 +15,7 @@ class Distribution extends React.Component {
     async componentDidMount() {     
         // Sort the output array
         distribution.sort(function (a,b) {
-            return a.donut - b.donut;
+            return b.donut - a.donut;
         });
         
         this.setState({ 
