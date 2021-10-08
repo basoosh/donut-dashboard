@@ -347,7 +347,7 @@ class Stake extends React.Component {
       const myGrowl = await growl({
         title: "Donuts successfully claimed!",
         message: amount + ' donuts harvested, fresh from the bakery.',
-        timeout: 9000
+        timeout: 8000
     });
     }
 
